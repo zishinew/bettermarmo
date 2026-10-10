@@ -62,6 +62,24 @@ typography:
     fontSize: "11px"
     fontWeight: 500
     letterSpacing: ".04em"
+  summary:
+    fontFamily: "BetterMarmo Geist, system-ui, sans-serif"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.65
+  caption:
+    fontFamily: "BetterMarmo Geist, system-ui, sans-serif"
+    fontSize: "11px"
+    fontWeight: 400
+  brand:
+    fontFamily: "BetterMarmo Geist, system-ui, sans-serif"
+    fontSize: "18px"
+    fontWeight: 650
+    letterSpacing: "-.025em"
+  mark:
+    fontFamily: "BetterMarmo Geist, system-ui, sans-serif"
+    fontSize: "19px"
+    fontWeight: 650
   code:
     fontFamily: "ui-monospace, monospace"
     fontSize: "13px"
@@ -123,7 +141,7 @@ components:
 
 The user-approved direction is black and white, very clean and modern, using Composio's visual language. Geist, quiet navigation, thin neutral rules and square black actions keep dense academic content easy to scan. The first viewport gives the course table room to breathe and keeps every desktop project column visible.
 
-Source authority is `extension/content/styles.css`, `extension/content/content.js` and `extension/popup/popup.css`. This describes the implemented extension, including its neutral dark appearance. Ten Firefox fixture tests passed; signed-in Waterloo compatibility has not been directly verified.
+Source authority is `extension/content/styles.css`, `extension/content/content.js`, `extension/content/results.js` and `extension/popup/popup.css`. This describes the implemented extension, including its neutral dark appearance. Fifteen Firefox fixture tests passed with zero lint warnings; signed-in Waterloo compatibility has not been directly verified.
 
 **Key Characteristics:**
 
@@ -144,17 +162,17 @@ Dark appearance uses true neutral black ground, near-black surfaces and neutral 
 
 Bundled variable Geist loads from `extension/fonts/Geist.ttf`, supports weights 100–900 and uses swap behavior. Content names the face BetterMarmo Geist; the popup names it Geist. System sans-serif is the fallback. Code uses platform monospace.
 
-The frontmatter records the heading/body/label hierarchy. Headings have restrained negative tracking; direct body paragraphs cap at 75ch. First-column labels and action links use weight 550. Tables and row counts use tabular numbers. The header brand and popup title are 18px/650. Popup body is 13px/1.5 with 11px captions, footer and status text. Phone project titles are 16px; field labels are 11px/400. There is no decorative display face.
+The frontmatter records the heading/body/label hierarchy and deliberate summary, caption, brand and mark roles. Headings have restrained negative tracking; direct body paragraphs cap at 75ch. First-column labels and action links use weight 550. Tables and row counts use tabular numbers. The header brand and popup title use the brand role; the identity mark uses the mark role. Submission summaries and Refresh results use 12px text; notes, case previews, outcomes and disclosure labels use 11px text. Popup body is 13px/1.5 with 11px captions, footer and status text. Phone project titles are 16px; field labels are 11px/400. There is no decorative display face.
 
 ## Layout
 
 The content body spans the available width up to 1680px, centered with desktop padding `100px 48px 44px`. The fixed header is 64px tall and uses `max(24px, calc((100vw - 1584px) / 2))` horizontal padding. Original navigation and breadcrumbs remain in the content flow.
 
-Table shells fill their work area. Legacy paragraph/div ancestors receive `.bm-table-host` to release narrow widths and paragraph line-length limits while enabled. Project tables use fixed column proportions of **28/12/12/17/31 percent**, with no 760px minimum. Long project names and titles wrap. Dense result tables retain the 760px minimum and scroll inside a focusable region; a visible cue appears only when columns overflow.
+Table shells fill their work area. Legacy paragraph/div ancestors receive `.bm-table-host` to release narrow widths and paragraph line-length limits while enabled. Project tables use fixed column proportions of **24/24/10/16/26 percent**, with no 760px minimum. Long project names and titles wrap. Dense result tables retain the 760px minimum and scroll inside a focusable region; a visible cue appears only when columns overflow.
 
 The toolbar has a 62px minimum height, `16px 20px` padding and 16px wrapping gaps. Search spans 200–360px and the count aligns to the end. Cells use `13px 16px`; compact mode reduces data-cell vertical padding to 10px.
 
-At 900px and below, body gutters become 24px and project-cell horizontal padding becomes 12px. At 700px and below, final body padding is `88px 16px 30px`, the header is 60px tall and its theme label disappears. Project rows become two-column field grids with `20px 16px` row padding and `12px 16px` gaps. Project names, deadlines and titles span both columns; `data-bm-label` supplies field labels. Desktop project headers are hidden on phones. Result tables still scroll. Tools use `12px 16px` padding; search minimum becomes 150px and the failures filter occupies a full row. Form cells stack; text inputs become 16px.
+At 900px and below, body gutters become 24px and project-cell horizontal padding becomes 12px. At 700px and below, final body padding is `88px 16px 30px`, the header is 60px tall and its theme label disappears. Project rows become two-column field grids with `20px 16px` row padding and `12px 16px` gaps. Project names, submissions, actions, deadlines and titles span both columns; `data-bm-label` supplies field labels. Desktop project headers are hidden on phones. Result tables still scroll. Tools use `12px 16px` padding; search minimum becomes 150px and the failures filter occupies a full row. Form cells stack; text inputs become 16px.
 
 Forms cap at 720px. The popup is 340px wide with 22px gutters, `24px 22px` header padding and 20px vertical setting rows. Printing removes the fixed header, tools and sort symbols and exposes table overflow.
 
@@ -185,6 +203,14 @@ Primary submit controls use action fill, surface-colored text and `11px 20px` pa
 ### Outcome cells and messages
 
 Use original text and recognized outcome/status/result columns or semantic classes. Status messages use soft fill, a thin border, 4px corners and 16px inset. Outcomes remain table cells; there is no separate badge/chip component.
+
+### Latest submission results
+
+The original submissions cell starts with a compact, unboxed results block and retains its original links below. A weight-550 status identifies the latest submission; tabular counts show each available test group as `passed / available passed`. Fractions sourced only from weighted score columns remain labelled `score`. Two named cases preview their textual outcomes. A native details disclosure labelled with the available case count reveals the complete readable list; opening it hides the duplicate preview. Long case names wrap and case rows use fine neutral dividers, without colored badges.
+
+Loading says `Loading results…`. Empty history says `Not submitted`; pending and compile failures say `Submitted · Testing pending` and `Submitted · Did not compile`. A submitted history without counts says `Test results not available yet`. Unreadable details retain the summary and say `Test cases unavailable · Open submission details`. A failed history read says `Couldn’t load results` and offers an underlined Retry action. These states stay distinct and never imply success or a grade.
+
+Refresh results is a quiet outlined toolbar button with 4px corners, 12px text and `6px 10px` inset. It clears cached reads and reloads results; it is disabled while reads are in progress. Retry uses inherited summary text, no fill or border, an underline and `4px 0` inset. Both inherit visible content focus. Results read the original same-origin history and detail pages, with three concurrent reads and 12-second timeouts. On phones, submissions and actions each occupy the full row width.
 
 ### Focus and settings
 

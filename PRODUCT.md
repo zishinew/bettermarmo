@@ -15,7 +15,7 @@ Inferred from the brief: University of Waterloo students using Marmoset to submi
 Redesign https://marmoset.student.cs.uwaterloo.ca/ with a modern, clean interface through a Firefox extension.
 
 ## Capabilities and Constraints
-Preserve original content, URLs, forms, hidden inputs, authentication, and submission semantics. Restrict extension access to the specified HTTPS host. No analytics or external requests. Local settings only. The signed-in Waterloo DOM is unavailable; compatibility is based on upstream JSP templates and must be verified on a signed-in deployment.
+Preserve original content, URLs, forms, hidden inputs, authentication, and submission semantics. Restrict extension access to the specified HTTPS host. No analytics or external requests. User-requested update: show latest submission results on the project list via read-only same-origin history/result requests. Empty histories say Not submitted; pending/error states remain distinct. Local settings only. The signed-in Waterloo DOM is unavailable; compatibility is based on upstream JSP templates and must be verified on a signed-in deployment.
 
 ## Brand Commitments
 Modern, clean UI/UX. User-confirmed update: black and white, using Composio’s design language. Full visible desktop table columns and readable mobile fields are required. BetterMarmo is an independent extension.

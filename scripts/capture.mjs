@@ -5,9 +5,11 @@ for (const [name, width, height] of [['desktop',1440,1000], ['mobile',390,844]])
   const page = await browser.newPage({ viewport: { width, height } });
   await page.goto('http://127.0.0.1:4173/demo/index.html');
   await page.evaluate(() => document.fonts.ready);
+  await page.waitForFunction(()=>![...document.querySelectorAll('.bm-project-results')].some(node=>node.textContent.includes('Loading')));
   await page.screenshot({path:`.impeccable/review/${name}.png`, fullPage:true});
   console.log(name, await page.evaluate(() => ({viewport:innerWidth,width:document.documentElement.scrollWidth,font:getComputedStyle(document.querySelector('h1')).fontSize})));
   await page.goto('http://127.0.0.1:4173/demo/legacy.html');
+  await page.waitForFunction(()=>![...document.querySelectorAll('.bm-project-results')].some(node=>node.textContent.includes('Loading')));
   await page.screenshot({path:`.impeccable/review/legacy-${name}.png`,fullPage:true});
   await page.goto('http://127.0.0.1:4173/demo/results.html');
   await page.screenshot({path:`.impeccable/review/results-${name}.png`,fullPage:true});

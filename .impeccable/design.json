@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-10T16:10:08.306958+00:00",
+  "generatedAt": "2026-10-10T16:47:01.348217+00:00",
   "title": "Design System: BetterMarmo",
   "extensions": {
     "colorMeta": {
@@ -161,6 +161,22 @@
       "popup-body": {
         "displayName": "Popup Body",
         "purpose": "Locally bundled Geist hierarchy."
+      },
+      "summary": {
+        "displayName": "Summary",
+        "purpose": "12px submission summaries and refresh controls."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "11px mobile labels, result notes, previews and disclosure labels."
+      },
+      "brand": {
+        "displayName": "Brand",
+        "purpose": "18px header identity and popup title."
+      },
+      "mark": {
+        "displayName": "Mark",
+        "purpose": "19px identity mark within the inverted square."
       }
     },
     "shadows": [],
@@ -188,6 +204,7 @@
     "sourceFiles": [
       "extension/content/styles.css",
       "extension/content/content.js",
+      "extension/content/results.js",
       "extension/popup/popup.css"
     ],
     "darkMode": {
@@ -196,7 +213,7 @@
     },
     "evidence": [
       "Explicit user-approved monochrome Composio direction.",
-      "Ten Firefox fixture tests passed, including 1024/1440/2048px desktop and 390px phone views.",
+      "Fifteen Firefox fixture tests passed, including 1024/1440/2048px desktop and 390px phone views; zero lint warnings.",
       "Signed-in Waterloo compatibility remains unverified."
     ]
   },
@@ -253,17 +270,23 @@
       "description": "Quiet bordered feedback surface.",
       "html": "<div class=\"ds-message\" role=\"status\">Illustrative submission feedback</div>",
       "css": ".ds-message{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;border:1px solid var(--bm-line,#e5e5e5);background:var(--bm-soft,#f5f5f5);color:var(--bm-text,#171717);border-radius:4px;padding:16px}"
+    },
+    {
+      "name": "Latest submission results",
+      "kind": "custom",
+      "description": "Illustrative submissions cell: counts, two case previews and a native disclosure retain original links. Refresh and Retry are visual previews only.",
+      "html": "<div class=\"ds-submissions\"><div class=\"ds-results\"><div class=\"ds-result-status\">Submission #3</div><div class=\"ds-result-count\">Public: 2 / 3 passed</div><div class=\"ds-case-preview\"><div class=\"ds-case-preview-row\"><span class=\"ds-case-name\">Basic input</span><span class=\"ds-case-outcome\">passed</span></div><div class=\"ds-case-preview-row\"><span class=\"ds-case-name\">Empty input</span><span class=\"ds-case-outcome\">failed</span></div></div><details class=\"ds-result-cases\"><summary>3 available test cases</summary><ul class=\"ds-case-list\"><li><span class=\"ds-case-name\">Basic input</span><span class=\"ds-case-outcome\">passed</span></li><li><span class=\"ds-case-name\">Empty input</span><span class=\"ds-case-outcome\">failed</span></li><li><span class=\"ds-case-name\">Boundary input</span><span class=\"ds-case-outcome\">passed</span></li></ul></details></div><a class=\"ds-history\" href=\"#\">View submissions</a><div class=\"ds-preview-controls\"><button class=\"ds-refresh\" type=\"button\">Refresh results</button><button class=\"ds-retry\" type=\"button\">Retry</button></div></div>",
+      "css": ".ds-submissions{font-family:\"BetterMarmo Geist\",Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;color:var(--bm-text,#171717);background:var(--bm-surface,#fff);max-width:100%}.ds-results{display:block;margin-bottom:6px;font-size:12px;font-weight:400}.ds-result-status{font-weight:550;margin-bottom:3px}.ds-result-count{font-variant-numeric:tabular-nums;line-height:1.7}.ds-case-preview{margin-top:7px}.ds-case-preview-row{display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:space-between;padding:3px 0;font-size:11px}.ds-results:has(details[open]) .ds-case-preview{display:none}.ds-case-name{overflow-wrap:anywhere;min-width:0}.ds-case-outcome{font-size:11px;color:var(--bm-muted,#666)}.ds-result-cases{margin-top:5px}.ds-result-cases summary{color:var(--bm-muted,#666);font-size:11px;cursor:pointer}.ds-case-list{list-style:none;margin:8px 0 0;padding:0}.ds-case-list li{display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:space-between;padding:5px 0;border-top:1px solid var(--bm-line,#e5e5e5)}.ds-history{color:var(--bm-link,#171717);font-weight:550;text-decoration:none;text-underline-offset:4px}.ds-history:hover{text-decoration:underline}.ds-preview-controls{display:flex;align-items:center;gap:16px;margin-top:12px;font-size:12px}.ds-refresh{display:inline-block;background:var(--bm-surface,#fff);color:var(--bm-text,#171717);border:1px solid var(--bm-line,#e5e5e5);border-radius:4px;font:inherit;padding:6px 10px;cursor:pointer}.ds-retry{background:none;border:0;color:var(--bm-text,#171717);text-decoration:underline;text-underline-offset:3px;font:inherit;padding:4px 0;cursor:pointer}.ds-refresh:focus-visible,.ds-retry:focus-visible,.ds-history:focus-visible,.ds-result-cases summary:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}.ds-refresh:disabled,.ds-retry:disabled{opacity:.5;cursor:not-allowed}"
     }
   ],
   "narrative": {
     "northStar": "Monochrome workspace",
-    "overview": "The user-approved direction is black and white, very clean and modern, using Composio\u2019s visual language. Locally bundled Geist, square actions, neutral rules and wide tables support dense academic workflows. Dark appearance stays neutral; phone project rows expose labelled fields.",
+    "overview": "The user-approved direction is black and white, very clean and modern, using Composio's visual language. Geist, quiet navigation, thin neutral rules and square black actions keep dense academic content easy to scan. The first viewport gives the course table room to breathe and keeps every desktop project column visible.",
     "keyCharacteristics": [
-      "Monochrome surfaces and actions",
-      "Bundled Geist and tabular numbers",
-      "Full visible desktop course columns",
-      "Labelled phone project fields",
-      "Flat surfaces and original workflows"
+      "Monochrome surfaces and actions, with no green, gold or colored result cells.",
+      "Locally bundled Geist and tabular numbers.",
+      "Wide desktop tables and labelled phone project fields.",
+      "Flat surfaces and reversible enhancements to original workflows."
     ],
     "rules": [
       {

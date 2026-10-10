@@ -1,4 +1,4 @@
-/* BetterMarmo enhances the original DOM; it never submits, fetches, or rewrites links. */
+/* BetterMarmo enhances the original DOM; it never submits or rewrites links. Results use read-only, same-origin GETs. */
 (() => {
   'use strict';
   if (document.getElementById('bm-topbar')) return;
@@ -6,6 +6,12 @@
   const defaults = { enabled: true, theme: 'system', compact: false };
   let settings = { ...defaults };
   const tables = new Map();
+  const resultPanels = new Map();
+  const pageCache = new Map();
+  const readQueue = [];
+  const activeReads = new Set();
+  let settingsReady = !api;
+  let readCount = 0;
   const media = matchMedia('(prefers-color-scheme: dark)');
   const icons = {
     search: '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/>',
@@ -43,6 +49,8 @@
       toggle.replaceChildren(icon(isDark() ? 'sun' : 'moon'), el('span', '', isDark() ? 'Light theme' : 'Dark theme'));
       toggle.setAttribute('aria-label', `Switch to ${isDark() ? 'light' : 'dark'} theme`);
     }
+    if (!settings.enabled) activeReads.forEach(controller => controller.abort());
+    if (settingsReady && settings.enabled) loadProjectResults();
     if (!settings.enabled) for (const state of tables.values()) {
       state.search.value = '';
       if (state.failures) state.failures.checked = false;
@@ -68,6 +76,129 @@
   topbar.append(brand, theme);
   document.body.prepend(topbar);
 
+  function drainReads() {
+    while (readCount < 3 && readQueue.length) {
+      const { url, resolve, reject } = readQueue.shift();
+      if (!settings.enabled) { reject(new Error('Results paused.')); continue; }
+      readCount++;
+      const controller = new AbortController();
+      activeReads.add(controller);
+      const timer = setTimeout(() => controller.abort(), 12000);
+      fetch(url, { credentials: 'same-origin', redirect: 'error', signal: controller.signal, cache: 'no-store' })
+        .then(async response => {
+          if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) throw new Error('Results unavailable.');
+          const html = await response.text();
+          if (html.length > 2000000) throw new Error('Results page too large.');
+          return html;
+        }).then(resolve, reject).finally(() => {
+          clearTimeout(timer);
+          activeReads.delete(controller);
+          readCount--;
+          drainReads();
+        });
+    }
+  }
+  function readPage(url, kind) {
+    if (!globalThis.BetterMarmoResults.allowedURL(new URL(url), kind)) return Promise.reject(new Error('Unsupported results link.'));
+    if (!pageCache.has(url)) {
+      const promise = new Promise((resolve, reject) => { readQueue.push({url, resolve, reject}); drainReads(); });
+      pageCache.set(url, promise);
+      promise.catch(() => { if (pageCache.get(url) === promise) pageCache.delete(url); });
+    }
+    return pageCache.get(url);
+  }
+  function paintResults(panel, result) {
+    panel.node.replaceChildren();
+    const labels = { empty: 'Not submitted', pending: 'Submitted · Testing pending', 'compile-error': 'Submitted · Did not compile' };
+    if (labels[result.status]) panel.node.append(el('div', 'bm-result-status', labels[result.status]));
+    else panel.node.append(el('div', 'bm-result-status', `Submission #${result.number}`));
+    for (const group of result.groups || []) {
+      const kind = group.kind === 'visible' ? 'Visible' : group.kind[0].toUpperCase() + group.kind.slice(1);
+      const suffix = group.unit === 'score' ? 'score' : 'passed';
+      panel.node.append(el('div', 'bm-result-count', `${kind}: ${group.passed} / ${group.total} ${suffix}`));
+    }
+    if (result.status === 'submitted' && !result.groups.length) panel.node.append(el('div', 'bm-result-note', 'Test results not available yet'));
+    if (result.detailsUnavailable) panel.node.append(el('div', 'bm-result-note', 'Test cases unavailable · Open submission details'));
+    if (result.cases?.length) {
+      const preview = el('div', 'bm-case-preview');
+      for (const item of result.cases.slice(0, 2)) {
+        const entry = el('div', 'bm-case-preview-row');
+        entry.append(el('span', 'bm-case-name', item.name), el('span', 'bm-case-outcome', item.outcome));
+        preview.append(entry);
+      }
+      panel.node.append(preview);
+      const details = el('details', 'bm-result-cases');
+      details.append(el('summary', '', `${result.cases.length} available test cases`));
+      const list = el('ul', 'bm-case-list');
+      for (const item of result.cases) {
+        const entry = el('li');
+        entry.append(el('span', 'bm-case-name', item.name), el('span', 'bm-case-outcome', item.outcome));
+        list.append(entry);
+      }
+      details.append(list);
+      panel.node.append(details);
+    }
+    panel.loaded = true;
+  }
+  function attachProjectResults(state) {
+    if (!state.projectTable || !globalThis.BetterMarmoResults) return;
+    for (const row of dataRows(state)) {
+      const cell = row.cells[1];
+      if (resultPanels.has(cell)) continue;
+      const link = [...cell.querySelectorAll('a[href]')].find(item => globalThis.BetterMarmoResults.allowedURL(new URL(item.href), 'project'));
+      const node = el('div', 'bm-ui bm-project-results');
+      node.append(el('span', 'bm-result-note', 'Loading results…'));
+      cell.prepend(node);
+      resultPanels.set(cell, {node, url: link?.href, loaded: false, loading: false});
+    }
+    if (!state.refresh) {
+      const refresh = el('button', 'bm-ui bm-refresh-results', 'Refresh results');
+      refresh.type = 'button';
+      refresh.addEventListener('click', () => {
+        pageCache.clear();
+        resultPanels.forEach(panel => { panel.loaded = false; });
+        loadProjectResults();
+      });
+      state.count.before(refresh);
+      state.refresh = refresh;
+    }
+  }
+  function loadProjectResults() {
+    if (!settingsReady || !settings.enabled || !globalThis.BetterMarmoResults) return;
+    for (const panel of resultPanels.values()) {
+      if (panel.loaded || panel.loading || !panel.node.isConnected) continue;
+      panel.loading = true;
+      panel.node.replaceChildren(el('span', 'bm-result-note', 'Loading results…'));
+      (async () => {
+        if (!panel.url) throw new Error('No submission history link.');
+        const html = await readPage(panel.url, 'project');
+        const result = globalThis.BetterMarmoResults.parseProject(html, panel.url);
+        if (result.status === 'submitted' && result.detailURL) {
+          try {
+            const detail = globalThis.BetterMarmoResults.parseResults(await readPage(result.detailURL, 'submission'));
+            if (detail?.groups.length) {
+              // Keep weighted scores only for groups whose actual cases are unavailable.
+              result.groups = [...detail.groups, ...result.groups.filter(group => !detail.groups.some(item => item.kind === group.kind))];
+              result.cases = detail.cases;
+            } else result.detailsUnavailable = true;
+          } catch { result.detailsUnavailable = true; }
+        }
+        if (settings.enabled) paintResults(panel, result);
+      })().catch(() => {
+        if (!settings.enabled) return;
+        panel.loaded = true;
+        panel.node.replaceChildren(el('div', 'bm-result-note', 'Couldn’t load results'));
+        const retry = el('button', 'bm-result-retry', 'Retry');
+        retry.type = 'button';
+        retry.addEventListener('click', () => { panel.loaded = false; pageCache.clear(); loadProjectResults(); });
+        panel.node.append(retry);
+      }).finally(() => {
+        panel.loading = false;
+        for (const state of tables.values()) if (state.refresh) state.refresh.disabled = [...resultPanels.values()].some(item => item.loading);
+      });
+    }
+    for (const state of tables.values()) if (state.refresh) state.refresh.disabled = [...resultPanels.values()].some(item => item.loading);
+  }
   function headerRow(table) {
     return [...table.rows].find(row => [...row.cells].some(cell => cell.tagName === 'TH'));
   }
@@ -218,6 +349,7 @@
     }
     search.addEventListener('input', () => filter(state));
     sortable(state);
+    attachProjectResults(state);
     filter(state);
   }
   function enhance() {
@@ -225,8 +357,10 @@
     for (const state of tables.values()) {
       if (!state.table.isConnected) { tables.delete(state.table); continue; }
       decorateRows(state);
+      attachProjectResults(state);
       filter(state);
     }
+    loadProjectResults();
     document.querySelectorAll('input[type="file"]').forEach(input => {
       if (!input.getAttribute('aria-label') && !input.labels?.length) input.setAttribute('aria-label', 'File to submit');
     });
@@ -250,7 +384,7 @@
   }).observe(document.body, { childList: true, characterData: true, subtree: true });
   media.addEventListener('change', () => applySettings(settings));
   if (api) {
-    api.storage.local.get('settings').then(result => applySettings(result.settings)).catch(() => {});
+    api.storage.local.get('settings').then(result => { settingsReady = true; applySettings(result.settings); }).catch(() => { settingsReady = true; applySettings(settings); });
     api.storage.onChanged.addListener((changes, area) => {
       if (area === 'local' && changes.settings) applySettings(changes.settings.newValue);
     });

@@ -5,10 +5,11 @@ A Firefox extension that gives Waterloo Marmoset a calmer, cleaner interface. It
 - Composio-inspired black and white interface, with light, dark, and system appearance.
 - Searchable course, project, submission, and test-result tables.
 - Sortable regular tables, preserving irregular rows and legacy layouts.
+- Latest submission results directly on the project list: passed/available case counts, two visible case previews, an expandable case list, and **Not submitted** for empty histories. Testing pending, compile failures, and errors have distinct states. Weighted score fractions are labelled scores when individual case results are unavailable.
 - A **Failures only** filter for test-result tables.
 - Readable outcome labels, keyboard focus, responsive table scrolling, and compact density.
 - Native file inputs, original links, form actions, hidden fields, and submission behavior.
-- One-click disable in the extension popup. Settings are stored locally; no analytics, external services, or background requests.
+- One-click disable in the extension popup. Settings are stored locally; no analytics or external services. Results use read-only requests to Marmoset while enabled.
 
 ## Load in Firefox
 
@@ -40,13 +41,13 @@ npm run lint
 npm run build
 ```
 
-The package is written to `dist/bettermarmo-1.1.0.zip`. No npm dependencies ship inside it. Firefox fixture tests cover search, empty states, sorting, combined result filters, local settings, mobile overflow, dynamic rows, preservation of the original submission form, and the restricted permission scope.
+The package is written to `dist/bettermarmo-1.2.0.zip`. No npm dependencies ship inside it. Firefox fixture tests cover search, empty states, sorting, combined result filters, local settings, mobile overflow, dynamic rows, preservation of the original submission form, and the restricted permission scope.
 
 ## Compatibility and boundaries
 
 The live CS site redirects to Waterloo SSO. Its signed-in pages were unavailable during development. Adapters are based on the [upstream Marmoset JSP templates](https://github.com/squished18/marmoset_ECE_base/tree/master/SubmitServer/trunk/SubmitServer2/WebRoot) and [Waterloo's documented student workflow](https://student.cs.uwaterloo.ca/~cs240e/w26/resources.phtml); the deployed Waterloo version may differ. **Signed-in compatibility and an actual upload have not been verified.**
 
-The extension only runs on `https://marmoset.student.cs.uwaterloo.ca/*`; it does not alter the Waterloo identity provider. It reads existing page text for local filtering and does not fetch other pages, infer scores, consume release tokens, auto-submit, or change server data. The browser's host permission is needed to apply the interface, and `storage` saves preferences.
+The extension only runs on `https://marmoset.student.cs.uwaterloo.ca/*`; it does not alter the Waterloo identity provider. It reads existing page text for local filtering. While enabled, it fetches same-origin submission history and latest test details with read-only GET requests (at most three concurrently, with a 12-second timeout). Results are cached in memory until Refresh results is selected. It does not infer scores, consume release tokens, auto-submit, or change server data. The browser's host permission is needed to apply the interface, and `storage` saves preferences.
 
 Only rectangular data rows are filtered. Rows with `colspan` or `rowspan` remain visible to preserve legacy summaries/errors, and irregular tables are not sorted. Date columns remain in server order because legacy dates can omit year and timezone. Code tables and form tables are excluded from enhancements. If a page looks wrong, disable the redesign from the popup and report its structure using anonymized HTML.
 

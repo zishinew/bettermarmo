@@ -214,3 +214,30 @@ html.bm-enabled[data-bm-theme='dark'] {
 
 .bm-enabled[data-bm-theme='dark'] .bm-submit-link:hover, .bm-enabled[data-bm-theme='dark'] input[type='submit']:hover { background: #d4d4d4; }
 .bm-enabled .header img { filter: grayscale(1); }
+
+.bm-enabled .bm-project-results { display: block; margin-bottom: 6px; font-size: 12px; font-weight: 400; }
+.bm-result-status { font-weight: 550; margin-bottom: 3px; }
+.bm-result-count { font-variant-numeric: tabular-nums; line-height: 1.7; }
+.bm-result-note { color: var(--bm-muted); font-size: 11px; }
+.bm-enabled .bm-refresh-results { display: inline-block; background: var(--bm-surface); color: var(--bm-text); border: 1px solid var(--bm-line); border-radius: 4px; font: inherit; font-size: 12px; padding: 6px 10px; }
+.bm-enabled .bm-result-retry { background: none; border: 0; color: var(--bm-text); text-decoration: underline; text-underline-offset: 3px; font: inherit; padding: 4px 0; }
+.bm-result-cases { margin-top: 5px; }
+.bm-result-cases summary { color: var(--bm-muted); font-size: 11px; cursor: pointer; }
+.bm-case-list { list-style: none; margin: 8px 0 0; padding: 0; }
+.bm-case-list li { display: flex; flex-wrap: wrap; gap: 4px 8px; justify-content: space-between; padding: 5px 0; border-top: 1px solid var(--bm-line); }
+.bm-case-name { overflow-wrap: anywhere; min-width: 0; }
+.bm-case-outcome { font-size: 11px; color: var(--bm-muted); }
+.bm-enabled .bm-project-table th:nth-child(1) { width: 24%; }
+.bm-enabled .bm-project-table th:nth-child(2) { width: 24%; }
+.bm-enabled .bm-project-table th:nth-child(3) { width: 10%; }
+.bm-enabled .bm-project-table th:nth-child(4) { width: 16%; }
+.bm-enabled .bm-project-table th:nth-child(5) { width: 26%; }
+@media (max-width: 700px) {
+  .bm-enabled .bm-project-table td:nth-child(2) { grid-column: 1 / -1; }
+  .bm-enabled .bm-project-table td:nth-child(3) { grid-column: 1 / -1; }
+  .bm-enabled .bm-refresh-results { order: 3; }
+}
+
+.bm-case-preview { margin-top: 7px; }
+.bm-case-preview-row { display: flex; flex-wrap: wrap; gap: 4px 8px; justify-content: space-between; padding: 3px 0; font-size: 11px; }
+.bm-project-results:has(details[open]) .bm-case-preview { display: none; }
