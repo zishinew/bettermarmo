@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-10T16:10:08.306958+00:00",
+  "title": "Design System: BetterMarmo",
+  "extensions": {
+    "colorMeta": {
+      "ground": {
+        "role": "neutral",
+        "displayName": "Ground"
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface"
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Text"
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted"
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Line"
+      },
+      "soft": {
+        "role": "neutral",
+        "displayName": "Soft"
+      },
+      "action": {
+        "role": "primary",
+        "displayName": "Action"
+      },
+      "link": {
+        "role": "primary",
+        "displayName": "Link"
+      },
+      "selection": {
+        "role": "neutral",
+        "displayName": "Selection"
+      },
+      "pass-bg": {
+        "role": "neutral",
+        "displayName": "Pass Bg"
+      },
+      "pass": {
+        "role": "neutral",
+        "displayName": "Pass"
+      },
+      "fail-bg": {
+        "role": "neutral",
+        "displayName": "Fail Bg"
+      },
+      "fail": {
+        "role": "neutral",
+        "displayName": "Fail"
+      },
+      "pending-bg": {
+        "role": "neutral",
+        "displayName": "Pending Bg"
+      },
+      "pending": {
+        "role": "neutral",
+        "displayName": "Pending"
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Focus"
+      },
+      "action-hover": {
+        "role": "neutral",
+        "displayName": "Action Hover"
+      },
+      "dark-ground": {
+        "role": "neutral",
+        "displayName": "Dark Ground"
+      },
+      "dark-surface": {
+        "role": "neutral",
+        "displayName": "Dark Surface"
+      },
+      "dark-text": {
+        "role": "neutral",
+        "displayName": "Dark Text"
+      },
+      "dark-muted": {
+        "role": "neutral",
+        "displayName": "Dark Muted"
+      },
+      "dark-line": {
+        "role": "neutral",
+        "displayName": "Dark Line"
+      },
+      "dark-soft": {
+        "role": "neutral",
+        "displayName": "Dark Soft"
+      },
+      "dark-action": {
+        "role": "primary",
+        "displayName": "Dark Action"
+      },
+      "dark-link": {
+        "role": "primary",
+        "displayName": "Dark Link"
+      },
+      "dark-pass-bg": {
+        "role": "neutral",
+        "displayName": "Dark Pass Bg"
+      },
+      "dark-pass": {
+        "role": "neutral",
+        "displayName": "Dark Pass"
+      },
+      "dark-fail-bg": {
+        "role": "neutral",
+        "displayName": "Dark Fail Bg"
+      },
+      "dark-fail": {
+        "role": "neutral",
+        "displayName": "Dark Fail"
+      },
+      "dark-pending-bg": {
+        "role": "neutral",
+        "displayName": "Dark Pending Bg"
+      },
+      "dark-pending": {
+        "role": "neutral",
+        "displayName": "Dark Pending"
+      },
+      "dark-action-hover": {
+        "role": "neutral",
+        "displayName": "Dark Action Hover"
+      }
+    },
+    "typographyMeta": {
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Locally bundled Geist hierarchy."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Locally bundled Geist hierarchy."
+      },
+      "section": {
+        "displayName": "Section",
+        "purpose": "Locally bundled Geist hierarchy."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Locally bundled Geist hierarchy."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Locally bundled Geist hierarchy."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Original source and traces."
+      },
+      "popup-body": {
+        "displayName": "Popup Body",
+        "purpose": "Locally bundled Geist hierarchy."
+      }
+    },
+    "shadows": [],
+    "motion": [],
+    "breakpoints": [
+      {
+        "name": "tablet-gutters",
+        "value": "900px"
+      },
+      {
+        "name": "stacked-projects",
+        "value": "700px"
+      }
+    ],
+    "focus": [
+      {
+        "name": "content",
+        "value": "outline:3px solid #737373;outline-offset:4px;border-radius:3px"
+      },
+      {
+        "name": "popup",
+        "value": "3px solid #737373; outline-offset: 3px"
+      }
+    ],
+    "sourceFiles": [
+      "extension/content/styles.css",
+      "extension/content/content.js",
+      "extension/popup/popup.css"
+    ],
+    "darkMode": {
+      "content": "html.bm-enabled[data-bm-theme=dark] replaces roles with the dark-* tokens. Primary actions invert to pale neutral; hover is #d4d4d4.",
+      "popup": ":root[data-theme=dark] uses neutral dark roles; Open Marmoset uses text fill and ground-colored text."
+    },
+    "evidence": [
+      "Explicit user-approved monochrome Composio direction.",
+      "Ten Firefox fixture tests passed, including 1024/1440/2048px desktop and 390px phone views.",
+      "Signed-in Waterloo compatibility remains unverified."
+    ]
+  },
+  "components": [
+    {
+      "name": "Submit control",
+      "kind": "button",
+      "description": "Original form action styling; preview does not submit.",
+      "html": "<button class=\"ds-submit\" type=\"button\">Submit</button>",
+      "css": ".ds-submit{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;background:var(--bm-action,#171717);color:var(--bm-surface,#fff);border:1px solid var(--bm-action,#171717);border-radius:4px;padding:11px 20px;font-weight:550;cursor:pointer}.ds-submit:hover{background:#404040}.ds-submit:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}.ds-submit:disabled{opacity:.5;cursor:not-allowed}:host-context([data-bm-theme=\"dark\"]) .ds-submit:hover{background:#d4d4d4}",
+      "refersTo": "button-primary"
+    },
+    {
+      "name": "Inline submit link",
+      "kind": "button",
+      "description": "Compact original course-table action.",
+      "html": "<a class=\"ds-submit-link\" href=\"#\">Submit</a>",
+      "css": ".ds-submit-link{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;display:inline-block;font-size:12px;background:var(--bm-action,#171717);color:var(--bm-surface,#fff);border-radius:3px;padding:5px 12px;font-weight:550;text-decoration:none;white-space:nowrap}.ds-submit-link:hover{background:#404040;text-decoration:underline}.ds-submit-link:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}:host-context([data-bm-theme=\"dark\"]) .ds-submit-link:hover{background:#d4d4d4}",
+      "refersTo": "submit-link"
+    },
+    {
+      "name": "Form field",
+      "kind": "input",
+      "description": "Neutral original form field.",
+      "html": "<input class=\"ds-field\" aria-label=\"Submission label\" placeholder=\"Submission label\">",
+      "css": ".ds-field{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;color:var(--bm-text,#171717);background:var(--bm-surface,#fff);border:1px solid var(--bm-line,#e5e5e5);border-radius:4px;padding:10px 12px;max-width:100%}.ds-field::placeholder{color:var(--bm-muted,#666);opacity:1}.ds-field:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}.ds-field:disabled{opacity:.5;cursor:not-allowed}",
+      "refersTo": "field"
+    },
+    {
+      "name": "Original navigation",
+      "kind": "nav",
+      "description": "Understated original breadcrumbs; illustrative labels.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Marmoset\"><a href=\"#\">Home</a> / <a href=\"#\">Course</a></nav>",
+      "css": ".ds-nav{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;font-size:13px;color:var(--bm-muted,#666)}.ds-nav a{color:var(--bm-link,#171717);text-decoration:none;text-underline-offset:4px}.ds-nav a:hover{text-decoration:underline}.ds-nav a:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}"
+    },
+    {
+      "name": "Outcome table",
+      "kind": "custom",
+      "description": "Illustrative neutral outcomes, preserving state through text and weight.",
+      "html": "<div class=\"ds-table\"><div class=\"ds-scroll\" tabindex=\"0\" role=\"region\" aria-label=\"Illustrative results\"><table><thead><tr><th>Test</th><th>Outcome</th></tr></thead><tbody><tr><td>Illustrative test</td><td class=\"ds-pass\">Passed</td></tr><tr><td>Illustrative test</td><td class=\"ds-fail\">Failed</td></tr><tr><td>Illustrative test</td><td class=\"ds-pending\">Pending</td></tr></tbody></table></div><p class=\"ds-hint\">Scroll horizontally to see all columns.</p></div>",
+      "css": ".ds-table{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;border:1px solid var(--bm-line,#e5e5e5);border-radius:6px;overflow:hidden;background:var(--bm-surface,#fff);color:var(--bm-text,#171717)}.ds-scroll{overflow-x:auto}.ds-scroll:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}.ds-table table{border-collapse:collapse;width:100%;min-width:760px;font-variant-numeric:tabular-nums}.ds-table th,.ds-table td{padding:13px 16px;border-bottom:1px solid var(--bm-line,#e5e5e5);text-align:left}.ds-table th{font-size:11px;font-weight:500;letter-spacing:.04em;background:var(--bm-soft,#f5f5f5);color:var(--bm-muted,#666)}.ds-table tr:last-child td{border-bottom:0}.ds-table tbody tr:hover td{background:var(--bm-soft,#f5f5f5)}.ds-table .ds-pass,.ds-table tr:hover .ds-pass{background:var(--bm-pass-bg,#fafafa);color:var(--bm-pass,#404040);font-weight:600}.ds-table .ds-fail,.ds-table tr:hover .ds-fail{background:var(--bm-fail-bg,#f0f0f0);color:var(--bm-fail,#171717);font-weight:650}.ds-table .ds-pending{background:var(--bm-pending-bg,#fafafa);color:var(--bm-pending,#666);font-weight:550;font-style:italic}.ds-hint{margin:0;padding:9px 16px;border-top:1px solid var(--bm-line,#e5e5e5);font-size:11px;color:var(--bm-muted,#666)}",
+      "refersTo": "table-container"
+    },
+    {
+      "name": "Theme control",
+      "kind": "button",
+      "description": "Neutral outlined header control with inline SVG.",
+      "html": "<button class=\"ds-theme\" type=\"button\" aria-label=\"Switch to dark theme\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 15.5A8.5 8.5 0 0 1 8.5 4a8.5 8.5 0 1 0 11.5 11.5Z\"/></svg><span>Dark theme</span></button>",
+      "css": ".ds-theme{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border-radius:4px;background:transparent;color:var(--bm-text,#171717);border:1px solid var(--bm-line,#e5e5e5);cursor:pointer;white-space:nowrap}.ds-theme:hover{background:var(--bm-soft,#f5f5f5)}.ds-theme:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}.ds-theme svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}"
+    },
+    {
+      "name": "Status message",
+      "kind": "card",
+      "description": "Quiet bordered feedback surface.",
+      "html": "<div class=\"ds-message\" role=\"status\">Illustrative submission feedback</div>",
+      "css": ".ds-message{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;border:1px solid var(--bm-line,#e5e5e5);background:var(--bm-soft,#f5f5f5);color:var(--bm-text,#171717);border-radius:4px;padding:16px}"
+    }
+  ],
+  "narrative": {
+    "northStar": "Monochrome workspace",
+    "overview": "The user-approved direction is black and white, very clean and modern, using Composio\u2019s visual language. Locally bundled Geist, square actions, neutral rules and wide tables support dense academic workflows. Dark appearance stays neutral; phone project rows expose labelled fields.",
+    "keyCharacteristics": [
+      "Monochrome surfaces and actions",
+      "Bundled Geist and tabular numbers",
+      "Full visible desktop course columns",
+      "Labelled phone project fields",
+      "Flat surfaces and original workflows"
+    ],
+    "rules": [
+      {
+        "name": "Outcome integrity",
+        "body": "Preserve outcome text and recognized states; never infer grades or submission success.",
+        "section": "colors"
+      },
+      {
+        "name": "Quiet depth",
+        "body": "Use tonal surfaces and fine borders without shadows or unnecessary motion.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use the approved monochrome direction and bundled Geist.",
+      "Do keep desktop course columns visible and phone fields labelled.",
+      "Do preserve original links and forms.",
+      "Do retain visible focus and overflow cues."
+    ],
+    "donts": [
+      "Do not reintroduce green, gold or colored status cells.",
+      "Do not fabricate grades or date sorting.",
+      "Do not claim signed-in live verification from fixture tests."
+    ]
+  }
+}

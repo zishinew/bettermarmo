@@ -1,0 +1,57 @@
+{
+  "manifest_version": 3,
+  "name": "BetterMarmo",
+  "version": "1.2.0",
+  "description": "A cleaner, calmer Marmoset. Searchable tables, readable results, and light or dark themes for Waterloo students.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://marmoset.student.cs.uwaterloo.ca/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://marmoset.student.cs.uwaterloo.ca/*"
+      ],
+      "js": [
+        "content/results.js",
+        "content/content.js"
+      ],
+      "css": [
+        "content/styles.css"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_title": "BetterMarmo settings",
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/icon.svg"
+  },
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bettermarmo@extensions.local",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "fonts/Geist.ttf"
+      ],
+      "matches": [
+        "https://marmoset.student.cs.uwaterloo.ca/*"
+      ]
+    }
+  ]
+}
