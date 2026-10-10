@@ -292,7 +292,7 @@
   }
   function enhanceTable(table) {
     if (tables.has(table) || table.closest('.bm-ui') || table.parentElement.closest('table') || table.querySelector('table') ||
-        table.matches('.form, .codetable, .stacktrace') || table.closest('form')) return;
+        table.matches('.form, .codetable, .stacktrace, .bm-account-table') || table.closest('form')) return;
     const header = headerRow(table);
     if (!header || header.cells.length < 2 || [...header.cells].some(c => c.colSpan !== 1)) return;
     const wrapper = el('section', 'bm-table-section');
@@ -352,7 +352,80 @@
     attachProjectResults(state);
     filter(state);
   }
+  function formatEntryPages() {
+    for (const table of document.querySelectorAll('table')) {
+      if (table.classList.contains('bm-account-table')) continue;
+      const header = headerRow(table);
+      const names = [...(header?.cells || [])].map(cell => cell.textContent.trim().toLowerCase());
+      if (names.length !== 3 || !/name/.test(names[0]) || !/directory/.test(names[1]) || !/authenticate/.test(names[2])) continue;
+      table.classList.add('bm-account-table');
+      document.body.classList.add('bm-login-page');
+      const title = el('div', 'bm-ui bm-entry-title');
+      title.append(el('h1', '', 'Continue to Marmoset'), el('p', '', 'Choose an account to access your courses.'));
+      table.before(title);
+      for (const row of [...table.rows].filter(row => row !== header && row.cells.length === 3)) {
+        row.cells[0].classList.add('bm-account-name');
+        row.cells[1].classList.add('bm-account-id');
+        for (const action of row.cells[2].querySelectorAll('a, input[type="submit"], button')) {
+          action.classList.add('bm-account-action');
+          // Keep the original action text/value and all server-owned attributes.
+          if (action.tagName === 'A' && action.textContent.trim() === 'as') {
+            const original = el('span', 'bm-entry-original');
+            original.append(...action.childNodes);
+            const arrow = icon('arrow');
+            arrow.classList.add('bm-ui');
+            action.append(original, el('span', 'bm-ui', 'Continue'), arrow);
+          }
+        }
+      }
+      for (const node of document.querySelectorAll('p, h2, h3')) {
+        if (node.closest('table, .bm-ui')) continue;
+        if (/^Current Marmoset courses:/i.test(node.textContent.trim())) node.classList.add('bm-entry-original');
+        if (/please login as one of the users/i.test(node.textContent)) { node.classList.add('bm-login-help'); node.before(title); }
+        if (/^Welcome to the Marmoset Submit/i.test(node.textContent.trim())) node.classList.add('bm-entry-original');
+      }
+    }
+    for (const list of document.querySelectorAll('ul, ol')) {
+      if (list.classList.contains('bm-course-list') || list.closest('.bm-ui')) continue;
+      const items = [...list.children];
+      if (!items.length || !items.every(item => item.tagName === 'LI' && item.querySelector('a') && /\([^()]+\d{4}\)/.test(item.querySelector('a').textContent))) continue;
+      list.classList.add('bm-course-list');
+      document.body.classList.add('bm-courses-page');
+      for (const item of items) {
+        const link = item.querySelector('a');
+        const match = link.textContent.trim().match(/^(.+?)\s*\(([^()]+)\):?$/);
+        if (!match) continue;
+        const original = el('span', 'bm-entry-original');
+        original.append(...link.childNodes);
+        const content = el('span', 'bm-ui bm-course-content');
+        content.append(el('span', 'bm-course-code', match[1]), el('span', 'bm-course-term', match[2]));
+        const action = el('span', 'bm-ui bm-course-open', 'Open course');
+        action.append(icon('arrow'));
+        link.append(original, content, action);
+      }
+    }
+    const archives = [...document.querySelectorAll('p')].filter(node => !node.classList.contains('bm-archive-row') && /^Marmoset courses from/i.test(node.textContent.trim()) && node.querySelector('a'));
+    if (archives.length) {
+      archives[0].before(el('h2', 'bm-ui bm-archive-title', 'Previous terms'));
+      for (const node of archives) {
+        node.classList.add('bm-archive-row');
+        const link = node.querySelector('a');
+        const term = node.textContent.split(':')[0].replace(/^Marmoset courses from\s*/i, '');
+        for (const child of [...node.childNodes]) {
+          if (child === link || child.contains?.(link)) continue;
+          const original = el('span', 'bm-entry-original');
+          child.before(original); original.append(child);
+        }
+        const original = el('span', 'bm-entry-original');
+        original.append(...link.childNodes);
+        const arrow = icon('arrow');
+        arrow.classList.add('bm-ui');
+        link.append(original, el('span', 'bm-ui', term), arrow);
+      }
+    }
+  }
   function enhance() {
+    formatEntryPages();
     document.querySelectorAll('table').forEach(enhanceTable);
     for (const state of tables.values()) {
       if (!state.table.isConnected) { tables.delete(state.table); continue; }

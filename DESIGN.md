@@ -41,6 +41,12 @@ typography:
     fontWeight: 650
     lineHeight: 1.3
     letterSpacing: "-.025em"
+  entry-headline:
+    fontFamily: "BetterMarmo Geist, system-ui, sans-serif"
+    fontSize: "clamp(28px, 4vw, 40px)"
+    fontWeight: 650
+    lineHeight: 1.3
+    letterSpacing: "-.025em"
   title:
     fontFamily: "BetterMarmo Geist, system-ui, sans-serif"
     fontSize: "20px"
@@ -89,6 +95,7 @@ typography:
     lineHeight: 1.5
 rounded:
   control: "4px"
+  entry-container: "8px"
   submit-link: "3px"
   table: "6px"
   code: "10px"
@@ -122,6 +129,15 @@ components:
   table-container:
     backgroundColor: "{colors.surface}"
     rounded: "{rounded.table}"
+  account-action:
+    backgroundColor: "{colors.action}"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.control}"
+    padding: "10px 16px"
+  entry-container:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.entry-container}"
+    padding: "24px"
   status-pass:
     backgroundColor: "{colors.pass-bg}"
     textColor: "{colors.pass}"
@@ -141,7 +157,7 @@ components:
 
 The user-approved direction is black and white, very clean and modern, using Composio's visual language. Geist, quiet navigation, thin neutral rules and square black actions keep dense academic content easy to scan. The first viewport gives the course table room to breathe and keeps every desktop project column visible.
 
-Source authority is `extension/content/styles.css`, `extension/content/content.js`, `extension/content/results.js` and `extension/popup/popup.css`. This describes the implemented extension, including its neutral dark appearance. Fifteen Firefox fixture tests passed with zero lint warnings; signed-in Waterloo compatibility has not been directly verified.
+Source authority is `extension/content/styles.css`, `extension/content/content.js`, `extension/content/results.js` and `extension/popup/popup.css`. This describes the implemented extension, including its neutral dark appearance. Sixteen Firefox fixture tests passed with zero extension lint errors, notices or warnings; final light login and course screenshots were reviewed at desktop and phone widths; signed-in Waterloo compatibility has not been directly verified.
 
 **Key Characteristics:**
 
@@ -162,7 +178,7 @@ Dark appearance uses true neutral black ground, near-black surfaces and neutral 
 
 Bundled variable Geist loads from `extension/fonts/Geist.ttf`, supports weights 100–900 and uses swap behavior. Content names the face BetterMarmo Geist; the popup names it Geist. System sans-serif is the fallback. Code uses platform monospace.
 
-The frontmatter records the heading/body/label hierarchy and deliberate summary, caption, brand and mark roles. Headings have restrained negative tracking; direct body paragraphs cap at 75ch. First-column labels and action links use weight 550. Tables and row counts use tabular numbers. The header brand and popup title use the brand role; the identity mark uses the mark role. Submission summaries and Refresh results use 12px text; notes, case previews, outcomes and disclosure labels use 11px text. Popup body is 13px/1.5 with 11px captions, footer and status text. Phone project titles are 16px; field labels are 11px/400. There is no decorative display face.
+The frontmatter records the heading/body/label hierarchy and deliberate summary, caption, brand and mark roles. Headings have restrained negative tracking; direct body paragraphs cap at 75ch. First-column labels and action links use weight 550. Tables and row counts use tabular numbers. The header brand and popup title use the brand role; the identity mark uses the mark role. Submission summaries and Refresh results use 12px text; notes, case previews, outcomes and disclosure labels use 11px text. Popup body is 13px/1.5 with 11px captions, footer and status text. Phone project titles are 16px; field labels are 11px/400. Entry headings use the separate fluid entry-headline role (28–40px). These endpoints and 8px entry containers are deliberate extensions of the existing hierarchy and corner language, including when the detector flags them. There is no decorative display face.
 
 ## Layout
 
@@ -174,21 +190,29 @@ The toolbar has a 62px minimum height, `16px 20px` padding and 16px wrapping gap
 
 At 900px and below, body gutters become 24px and project-cell horizontal padding becomes 12px. At 700px and below, final body padding is `88px 16px 30px`, the header is 60px tall and its theme label disappears. Project rows become two-column field grids with `20px 16px` row padding and `12px 16px` gaps. Project names, submissions, actions, deadlines and titles span both columns; `data-bm-label` supplies field labels. Desktop project headers are hidden on phones. Result tables still scroll. Tools use `12px 16px` padding; search minimum becomes 150px and the failures filter occupies a full row. Form cells stack; text inputs become 16px.
 
+Login and course selection use a centered shell capped at 1080px. Current courses form two equal columns with 16px gaps; at 640px and below they become one column with 12px gaps. Account rows stack at that breakpoint with 20px inset and a full-width action. Entry title margins are 48px above and 28px below, reducing the upper margin to 32px on phones.
+
 Forms cap at 720px. The popup is 340px wide with 22px gutters, `24px 22px` header padding and 20px vertical setting rows. Printing removes the fixed header, tools and sort symbols and exposes table overflow.
 
 ## Elevation & Depth
 
-There are no shadows, blur or animated transitions. Surface tones and 1px rules provide depth. The fixed header's stacking order is structural. Hover changes neutral fills and underlines links; keyboard focus is an outline without glow.
+There are no shadows or blur. Account and course choosers receive one 200ms entrance from .4 to 1 opacity and a 6px rise, using cubic-bezier(.23, 1, .32, 1). Course and account arrows move 3px on pointer hover with a 150ms transition using the same easing. Reduced motion replaces the entrance with a 150ms ease opacity fade from .7 to 1 and disables arrow movement. Existing reading tables have no entrance motion. Surface tones and 1px rules provide depth. The fixed header's stacking order is structural. Hover changes neutral fills and underlines links; keyboard focus is an outline without glow.
 
 ## Shapes
 
-Actions are square in character with restrained 3–4px corners. Table shells and file-selector buttons use 6px corners; code blocks use 10px. Tables use bottom dividers rather than individually boxed cells. The 33px identity mark is a solid inverted square with 3px corners and no border.
+Actions are square in character with restrained 3–4px corners. Entry account and course containers use 8px corners with 4px actions. Table shells and file-selector buttons use 6px corners; code blocks use 10px. Tables use bottom dividers rather than individually boxed cells. The 33px identity mark is a solid inverted square with 3px corners and no border.
 
 ## Components
 
 ### Header and navigation
 
 A neutral surface header holds the identity and an end-aligned outlined theme button. Its 18px SVG icons use rounded strokes. Theme hover uses the soft neutral fill. Retain original navigation, instructor links, breadcrumbs and logout. Breadcrumb links underline on hover; logout link and visited states remain neutral. The original header image is grayscale.
+
+### Account and course entry
+
+Login presents “Continue to Marmoset”, original authorization help, account name, directory identity and a Continue action. Account rows use a surface fill, thin neutral border and 24px cell inset; names use 18px/600 and directory text is muted. The action retains server-owned attributes and uses the original destination.
+
+Current courses use full-card original links with 24px inset, 24px/650 course codes, muted 13px terms and a 13px Open course row. Pointer hover adds a soft fill and muted border. Previous terms are quiet 13px text links with 14px vertical inset, fine bottom rules and a 16px section title. Exact original archive URLs remain intact. Original labels are retained and restored when the extension is disabled. No raster asset ships with this extension.
 
 ### Table tools and data
 

@@ -203,3 +203,28 @@ test('latest submission is chosen by number and fetch adapters reject action/ext
   assert.equal(result.number,11);assert.equal(result.unit,'score');assert.equal(result.external,false);assert.equal(result.action,false);
   await page.close();
 });
+test('entry pages preserve original navigation, adapt on phones and restore when disabled', async () => {
+  for (const route of ['login.html', 'courses.html']) {
+    const page = await pageAt(route, {viewport:{width:390,height:844}, reducedMotion:'reduce'});
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth), true);
+    assert.equal(await page.locator('.bm-table-tools').count(), 0);
+    if (route === 'login.html') {
+      assert.equal(await page.locator('.bm-account-action').getAttribute('href'), 'courses.html');
+      assert.equal(await page.getByRole('heading',{name:'Continue to Marmoset'}).isVisible(), true);
+      assert.equal(await page.locator('.bm-account-action').innerText(), 'Continue');
+      assert.equal(await page.locator('.bm-account-table').evaluate(n=>getComputedStyle(n).animationName), 'bm-entry-fade');
+    } else {
+      assert.equal(await page.locator('.bm-course-list a').count(), 4);
+      assert.equal(await page.locator('.bm-course-code').first().innerText(), 'CS136L');
+      assert.equal(await page.locator('.bm-course-term').first().innerText(), 'Winter 2026');
+    }
+    const archives = await page.locator('.bm-archive-row a').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href')));
+    assert.equal(archives.length,4);
+    await page.evaluate(()=>browser.storage.local.set({settings:{enabled:false,theme:'system',compact:false}}));
+    assert.equal(await page.locator('.bm-archive-title').isVisible(), false);
+    if (route === 'login.html') assert.equal(await page.locator('.bm-account-action').innerText(),'as');
+    else assert.equal(await page.locator('.bm-course-list a').first().innerText(),'CS136L (Winter 2026):');
+    assert.deepEqual(await page.locator('.bm-archive-row a').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),archives);
+    await page.close();
+  }
+});

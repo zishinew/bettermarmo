@@ -17,6 +17,13 @@ for (const [name, width, height] of [['desktop',1440,1000], ['mobile',390,844]])
   await page.screenshot({path:`.impeccable/review/dark-${name}.png`,fullPage:true});
   await page.goto('http://127.0.0.1:4173/demo/submit.html');
   await page.screenshot({path:`.impeccable/review/upload-${name}.png`,fullPage:true});
+  for (const entry of ['login', 'courses']) {
+    await page.goto(`http://127.0.0.1:4173/demo/${entry}.html`);
+    await page.evaluate(() => browser.storage.local.set({settings:{enabled:true,theme:'light',compact:false}}));
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForTimeout(300);
+    await page.screenshot({path:`.impeccable/review/${entry}-${name}.png`,fullPage:true});
+  }
   await page.close();
 }
 const popup = await browser.newPage({viewport:{width:340,height:470}});

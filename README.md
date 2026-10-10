@@ -41,7 +41,7 @@ npm run lint
 npm run build
 ```
 
-The package is written to `dist/bettermarmo-1.2.0.zip`. No npm dependencies ship inside it. Firefox fixture tests cover search, empty states, sorting, combined result filters, local settings, mobile overflow, dynamic rows, preservation of the original submission form, and the restricted permission scope.
+The package is written to `dist/bettermarmo-1.3.0.zip`. No npm dependencies ship inside it. Firefox fixture tests cover search, empty states, sorting, combined result filters, local settings, mobile overflow, dynamic rows, preservation of the original submission form, and the restricted permission scope.
 
 ## Compatibility and boundaries
 
@@ -64,3 +64,5 @@ Known development-tool limitation: the current `web-ext` dependency tree has unp
 
 Geist is bundled under its SIL Open Font License in `extension/fonts/LICENSE.txt`. BetterMarmo is an independent project, not affiliated with the University of Waterloo.
 # bettermarmo
+
+The Marmoset account chooser and course-selection list have dedicated responsive layouts. Original authentication URLs and form semantics are preserved; older-term links are condensed. Entry fades and pointer-hover arrow feedback respect reduced motion.
