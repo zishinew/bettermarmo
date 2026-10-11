@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "BetterMarmo",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "A cleaner, calmer Marmoset. Searchable tables, readable results, and light or dark themes for Waterloo students.",
   "permissions": [
     "storage"

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-11T19:46:11.314323+00:00",
+  "generatedAt": "2026-10-11T18:59:14.714693+00:00",
   "title": "Design System: BetterMarmo",
   "extensions": {
     "colorMeta": {
@@ -32,28 +32,12 @@
         "role": "primary",
         "displayName": "Action"
       },
-      "on-action": {
-        "role": "neutral",
-        "displayName": "On Action"
-      },
-      "header": {
-        "role": "neutral",
-        "displayName": "Header"
-      },
-      "on-header": {
-        "role": "neutral",
-        "displayName": "On Header"
-      },
-      "action-hover": {
-        "role": "neutral",
-        "displayName": "Action Hover"
-      },
       "link": {
         "role": "primary",
         "displayName": "Link"
       },
       "selection": {
-        "role": "primary",
+        "role": "neutral",
         "displayName": "Selection"
       },
       "pass-bg": {
@@ -79,6 +63,14 @@
       "pending": {
         "role": "neutral",
         "displayName": "Pending"
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Focus"
+      },
+      "action-hover": {
+        "role": "neutral",
+        "displayName": "Action Hover"
       },
       "dark-ground": {
         "role": "neutral",
@@ -108,22 +100,6 @@
         "role": "primary",
         "displayName": "Dark Action"
       },
-      "dark-on-action": {
-        "role": "neutral",
-        "displayName": "Dark On Action"
-      },
-      "dark-header": {
-        "role": "neutral",
-        "displayName": "Dark Header"
-      },
-      "dark-on-header": {
-        "role": "neutral",
-        "displayName": "Dark On Header"
-      },
-      "dark-action-hover": {
-        "role": "neutral",
-        "displayName": "Dark Action Hover"
-      },
       "dark-link": {
         "role": "primary",
         "displayName": "Dark Link"
@@ -152,21 +128,9 @@
         "role": "neutral",
         "displayName": "Dark Pending"
       },
-      "focus": {
+      "dark-action-hover": {
         "role": "neutral",
-        "displayName": "Focus"
-      },
-      "dark-focus": {
-        "role": "neutral",
-        "displayName": "Dark Focus"
-      },
-      "gold-outline": {
-        "role": "primary",
-        "displayName": "Gold Outline"
-      },
-      "on-selection": {
-        "role": "neutral",
-        "displayName": "On Selection"
+        "displayName": "Dark Action Hover"
       }
     },
     "typographyMeta": {
@@ -254,11 +218,11 @@
     "focus": [
       {
         "name": "content",
-        "value": "3px solid var(--bm-link); outline-offset:4px; border-radius:3px"
+        "value": "outline:3px solid #737373;outline-offset:4px;border-radius:3px"
       },
       {
         "name": "popup",
-        "value": "3px solid var(--accent); outline-offset:3px"
+        "value": "3px solid #737373; outline-offset: 3px"
       }
     ],
     "sourceFiles": [
@@ -268,15 +232,17 @@
       "extension/popup/popup.css"
     ],
     "darkMode": {
-      "content": "Pure black ground, surfaces and header; neutral gray supporting fills and rules; light red actions and links. Current term uses transparent fill, neutral text and a fine gold outline.",
-      "popup": "Pure black ground/surface/header, gray neutral roles and light red controls with black on-action text."
+      "content": "html.bm-enabled[data-bm-theme=dark] replaces roles with the dark-* tokens. Primary actions invert to pale neutral; hover is #d4d4d4.",
+      "popup": ":root[data-theme=dark] uses neutral dark roles; Open Marmoset uses text fill and ground-colored text."
     },
     "evidence": [
-      "Latest user correction requires pure white/black principal surfaces and restrained red/gold accents.",
-      "Seventeen Firefox fixture tests passed; extension lint has zero errors, notices or warnings; build 1.4.1 completed and screenshot review approved shipping.",
-      "Signed-in Waterloo compatibility and deployed colors remain unverified.",
-      "Geist typography, layouts, motion and original workflows are retained.",
-      "No raster asset ships with this extension."
+      "Explicit user-approved monochrome Composio direction.",
+      "Seventeen Firefox fixture tests passed; extension lint has zero errors, notices or warnings.",
+      "Final light login and course screenshots reviewed at desktop and mobile widths.",
+      "Signed-in Waterloo compatibility remains unverified.",
+      "28\u201340px entry headings and 8px entry containers are intentional detector advisories.",
+      "No raster asset ships with this extension.",
+      "Current-term course desktop/mobile captures fixed to October 11, 2026 (Fall 2026); build 1.3.1."
     ]
   },
   "components": [
@@ -285,7 +251,7 @@
       "kind": "button",
       "description": "Original form action styling; preview does not submit.",
       "html": "<button class=\"ds-submit\" type=\"button\">Submit</button>",
-      "css": ".ds-submit{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;background:var(--bm-action,#cc0000);color:var(--bm-on-action,#ffffff);border:1px solid var(--bm-action,#cc0000);border-radius:4px;padding:11px 20px;font-weight:550;cursor:pointer}.ds-submit:hover{background:var(--bm-hover-action,#aa0000)}.ds-submit:focus-visible{outline:3px solid var(--bm-link,#aa0000);outline-offset:4px;border-radius:3px}.ds-submit:disabled{opacity:.5;cursor:not-allowed}:host-context([data-bm-theme=\"dark\"]) .ds-submit:hover{background:var(--bm-hover-action,#ff8585)}",
+      "css": ".ds-submit{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;background:var(--bm-action,#171717);color:var(--bm-surface,#fff);border:1px solid var(--bm-action,#171717);border-radius:4px;padding:11px 20px;font-weight:550;cursor:pointer}.ds-submit:hover{background:#404040}.ds-submit:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}.ds-submit:disabled{opacity:.5;cursor:not-allowed}:host-context([data-bm-theme=\"dark\"]) .ds-submit:hover{background:#d4d4d4}",
       "refersTo": "button-primary"
     },
     {
@@ -293,7 +259,7 @@
       "kind": "button",
       "description": "Compact original course-table action.",
       "html": "<a class=\"ds-submit-link\" href=\"#\">Submit</a>",
-      "css": ".ds-submit-link{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;display:inline-block;font-size:12px;background:var(--bm-action,#cc0000);color:var(--bm-on-action,#ffffff);border-radius:3px;padding:5px 12px;font-weight:550;text-decoration:none;white-space:nowrap}.ds-submit-link:hover{background:var(--bm-hover-action,#aa0000);text-decoration:underline}.ds-submit-link:focus-visible{outline:3px solid var(--bm-link,#aa0000);outline-offset:4px;border-radius:3px}:host-context([data-bm-theme=\"dark\"]) .ds-submit-link:hover{background:var(--bm-hover-action,#ff8585)}",
+      "css": ".ds-submit-link{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;display:inline-block;font-size:12px;background:var(--bm-action,#171717);color:var(--bm-surface,#fff);border-radius:3px;padding:5px 12px;font-weight:550;text-decoration:none;white-space:nowrap}.ds-submit-link:hover{background:#404040;text-decoration:underline}.ds-submit-link:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}:host-context([data-bm-theme=\"dark\"]) .ds-submit-link:hover{background:#d4d4d4}",
       "refersTo": "submit-link"
     },
     {
@@ -301,7 +267,7 @@
       "kind": "input",
       "description": "Neutral original form field.",
       "html": "<input class=\"ds-field\" aria-label=\"Submission label\" placeholder=\"Submission label\">",
-      "css": ".ds-field{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;color:var(--bm-text,#171717);background:var(--bm-surface,#fff);border:1px solid var(--bm-line,#e5e5e5);border-radius:4px;padding:10px 12px;max-width:100%}.ds-field::placeholder{color:var(--bm-muted,#666666);opacity:1}.ds-field:focus-visible{outline:3px solid var(--bm-link,#aa0000);outline-offset:4px;border-radius:3px}.ds-field:disabled{opacity:.5;cursor:not-allowed}",
+      "css": ".ds-field{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;color:var(--bm-text,#171717);background:var(--bm-surface,#fff);border:1px solid var(--bm-line,#e5e5e5);border-radius:4px;padding:10px 12px;max-width:100%}.ds-field::placeholder{color:var(--bm-muted,#666);opacity:1}.ds-field:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}.ds-field:disabled{opacity:.5;cursor:not-allowed}",
       "refersTo": "field"
     },
     {
@@ -309,22 +275,22 @@
       "kind": "nav",
       "description": "Understated original breadcrumbs; illustrative labels.",
       "html": "<nav class=\"ds-nav\" aria-label=\"Marmoset\"><a href=\"#\">Home</a> / <a href=\"#\">Course</a></nav>",
-      "css": ".ds-nav{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;font-size:13px;color:var(--bm-muted,#666666)}.ds-nav a{color:var(--bm-link,#aa0000);text-decoration:none;text-underline-offset:4px}.ds-nav a:hover{text-decoration:underline}.ds-nav a:focus-visible{outline:3px solid var(--bm-link,#aa0000);outline-offset:4px;border-radius:3px}"
+      "css": ".ds-nav{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;font-size:13px;color:var(--bm-muted,#666)}.ds-nav a{color:var(--bm-link,#171717);text-decoration:none;text-underline-offset:4px}.ds-nav a:hover{text-decoration:underline}.ds-nav a:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}"
     },
     {
       "name": "Outcome table",
       "kind": "custom",
-      "description": "Neutral status fills preserve original text and weight, with red failure text.",
+      "description": "Illustrative neutral outcomes, preserving state through text and weight.",
       "html": "<div class=\"ds-table\"><div class=\"ds-scroll\" tabindex=\"0\" role=\"region\" aria-label=\"Illustrative results\"><table><thead><tr><th>Test</th><th>Outcome</th></tr></thead><tbody><tr><td>Illustrative test</td><td class=\"ds-pass\">Passed</td></tr><tr><td>Illustrative test</td><td class=\"ds-fail\">Failed</td></tr><tr><td>Illustrative test</td><td class=\"ds-pending\">Pending</td></tr></tbody></table></div><p class=\"ds-hint\">Scroll horizontally to see all columns.</p></div>",
-      "css": ".ds-table{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;border:1px solid var(--bm-line,#e5e5e5);border-radius:6px;overflow:hidden;background:var(--bm-surface,#fff);color:var(--bm-text,#171717)}.ds-scroll{overflow-x:auto}.ds-scroll:focus-visible{outline:3px solid var(--bm-link,#aa0000);outline-offset:4px;border-radius:3px}.ds-table table{border-collapse:collapse;width:100%;min-width:760px;font-variant-numeric:tabular-nums}.ds-table th,.ds-table td{padding:13px 16px;border-bottom:1px solid var(--bm-line,#e5e5e5);text-align:left}.ds-table th{font-size:11px;font-weight:500;letter-spacing:.04em;background:var(--bm-soft,#f5f5f5);color:var(--bm-text,#171717)}.ds-table tr:last-child td{border-bottom:0}.ds-table tbody tr:hover td{background:var(--bm-soft,#f5f5f5)}.ds-table .ds-pass,.ds-table tr:hover .ds-pass{background:var(--bm-pass-bg,#fafafa);color:var(--bm-pass,#404040);font-weight:600}.ds-table .ds-fail,.ds-table tr:hover .ds-fail{background:var(--bm-fail-bg,#fafafa);color:var(--bm-fail,#aa0000);font-weight:650}.ds-table .ds-pending{background:var(--bm-pending-bg,#f5f5f5);color:var(--bm-pending,#666666);font-weight:550;font-style:italic}.ds-hint{margin:0;padding:9px 16px;border-top:1px solid var(--bm-line,#e5e5e5);font-size:11px;color:var(--bm-muted,#666666)}",
+      "css": ".ds-table{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;border:1px solid var(--bm-line,#e5e5e5);border-radius:6px;overflow:hidden;background:var(--bm-surface,#fff);color:var(--bm-text,#171717)}.ds-scroll{overflow-x:auto}.ds-scroll:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}.ds-table table{border-collapse:collapse;width:100%;min-width:760px;font-variant-numeric:tabular-nums}.ds-table th,.ds-table td{padding:13px 16px;border-bottom:1px solid var(--bm-line,#e5e5e5);text-align:left}.ds-table th{font-size:11px;font-weight:500;letter-spacing:.04em;background:var(--bm-soft,#f5f5f5);color:var(--bm-muted,#666)}.ds-table tr:last-child td{border-bottom:0}.ds-table tbody tr:hover td{background:var(--bm-soft,#f5f5f5)}.ds-table .ds-pass,.ds-table tr:hover .ds-pass{background:var(--bm-pass-bg,#fafafa);color:var(--bm-pass,#404040);font-weight:600}.ds-table .ds-fail,.ds-table tr:hover .ds-fail{background:var(--bm-fail-bg,#f0f0f0);color:var(--bm-fail,#171717);font-weight:650}.ds-table .ds-pending{background:var(--bm-pending-bg,#fafafa);color:var(--bm-pending,#666);font-weight:550;font-style:italic}.ds-hint{margin:0;padding:9px 16px;border-top:1px solid var(--bm-line,#e5e5e5);font-size:11px;color:var(--bm-muted,#666)}",
       "refersTo": "table-container"
     },
     {
       "name": "Theme control",
       "kind": "button",
       "description": "Neutral outlined header control with inline SVG.",
-      "html": "<div class=\"ds-header\"><button class=\"ds-theme\" type=\"button\" aria-label=\"Switch to dark theme\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 15.5A8.5 8.5 0 0 1 8.5 4a8.5 8.5 0 1 0 11.5 11.5Z\"/></svg><span>Dark theme</span></button></div>",
-      "css": ".ds-theme{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border-radius:4px;background:transparent;color:var(--bm-on-header,#171717);border:1px solid var(--bm-line,#e5e5e5);cursor:pointer;white-space:nowrap}.ds-theme:hover{background:var(--bm-soft,#f5f5f5)}.ds-theme:focus-visible{outline:3px solid var(--bm-link,#aa0000);outline-offset:4px;border-radius:3px}.ds-theme svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}.ds-header{background:var(--bm-header,#ffffff);color:var(--bm-on-header,#171717);padding:16px;display:flex;justify-content:flex-end;border-bottom:1px solid var(--bm-line,#e5e5e5)}"
+      "html": "<button class=\"ds-theme\" type=\"button\" aria-label=\"Switch to dark theme\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M20 15.5A8.5 8.5 0 0 1 8.5 4a8.5 8.5 0 1 0 11.5 11.5Z\"/></svg><span>Dark theme</span></button>",
+      "css": ".ds-theme{font-family:'BetterMarmo Geist',Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border-radius:4px;background:transparent;color:var(--bm-text,#171717);border:1px solid var(--bm-line,#e5e5e5);cursor:pointer;white-space:nowrap}.ds-theme:hover{background:var(--bm-soft,#f5f5f5)}.ds-theme:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}.ds-theme svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}"
     },
     {
       "name": "Status message",
@@ -338,7 +304,7 @@
       "kind": "custom",
       "description": "Illustrative submissions cell: counts, two case previews and a native disclosure retain original links. Refresh and Retry are visual previews only.",
       "html": "<div class=\"ds-submissions\"><div class=\"ds-results\"><div class=\"ds-result-status\">Submission #3</div><div class=\"ds-result-count\">Public: 2 / 3 passed</div><div class=\"ds-case-preview\"><div class=\"ds-case-preview-row\"><span class=\"ds-case-name\">Basic input</span><span class=\"ds-case-outcome\">passed</span></div><div class=\"ds-case-preview-row\"><span class=\"ds-case-name\">Empty input</span><span class=\"ds-case-outcome\">failed</span></div></div><details class=\"ds-result-cases\"><summary>3 available test cases</summary><ul class=\"ds-case-list\"><li><span class=\"ds-case-name\">Basic input</span><span class=\"ds-case-outcome\">passed</span></li><li><span class=\"ds-case-name\">Empty input</span><span class=\"ds-case-outcome\">failed</span></li><li><span class=\"ds-case-name\">Boundary input</span><span class=\"ds-case-outcome\">passed</span></li></ul></details></div><a class=\"ds-history\" href=\"#\">View submissions</a><div class=\"ds-preview-controls\"><button class=\"ds-refresh\" type=\"button\">Refresh results</button><button class=\"ds-retry\" type=\"button\">Retry</button></div></div>",
-      "css": ".ds-submissions{font-family:\"BetterMarmo Geist\",Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;color:var(--bm-text,#171717);background:var(--bm-surface,#fff);max-width:100%}.ds-results{display:block;margin-bottom:6px;font-size:12px;font-weight:400}.ds-result-status{font-weight:550;margin-bottom:3px}.ds-result-count{font-variant-numeric:tabular-nums;line-height:1.7}.ds-case-preview{margin-top:7px}.ds-case-preview-row{display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:space-between;padding:3px 0;font-size:11px}.ds-results:has(details[open]) .ds-case-preview{display:none}.ds-case-name{overflow-wrap:anywhere;min-width:0}.ds-case-outcome{font-size:11px;color:var(--bm-muted,#666666)}.ds-result-cases{margin-top:5px}.ds-result-cases summary{color:var(--bm-muted,#666666);font-size:11px;cursor:pointer}.ds-case-list{list-style:none;margin:8px 0 0;padding:0}.ds-case-list li{display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:space-between;padding:5px 0;border-top:1px solid var(--bm-line,#e5e5e5)}.ds-history{color:var(--bm-link,#aa0000);font-weight:550;text-decoration:none;text-underline-offset:4px}.ds-history:hover{text-decoration:underline}.ds-preview-controls{display:flex;align-items:center;gap:16px;margin-top:12px;font-size:12px}.ds-refresh{display:inline-block;background:var(--bm-surface,#fff);color:var(--bm-text,#171717);border:1px solid var(--bm-line,#e5e5e5);border-radius:4px;font:inherit;padding:6px 10px;cursor:pointer}.ds-retry{background:none;border:0;color:var(--bm-text,#171717);text-decoration:underline;text-underline-offset:3px;font:inherit;padding:4px 0;cursor:pointer}.ds-refresh:focus-visible,.ds-retry:focus-visible,.ds-history:focus-visible,.ds-result-cases summary:focus-visible{outline:3px solid var(--bm-link,#aa0000);outline-offset:4px;border-radius:3px}.ds-refresh:disabled,.ds-retry:disabled{opacity:.5;cursor:not-allowed}"
+      "css": ".ds-submissions{font-family:\"BetterMarmo Geist\",Geist,system-ui,sans-serif;font-size:14px;line-height:1.65;color:var(--bm-text,#171717);background:var(--bm-surface,#fff);max-width:100%}.ds-results{display:block;margin-bottom:6px;font-size:12px;font-weight:400}.ds-result-status{font-weight:550;margin-bottom:3px}.ds-result-count{font-variant-numeric:tabular-nums;line-height:1.7}.ds-case-preview{margin-top:7px}.ds-case-preview-row{display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:space-between;padding:3px 0;font-size:11px}.ds-results:has(details[open]) .ds-case-preview{display:none}.ds-case-name{overflow-wrap:anywhere;min-width:0}.ds-case-outcome{font-size:11px;color:var(--bm-muted,#666)}.ds-result-cases{margin-top:5px}.ds-result-cases summary{color:var(--bm-muted,#666);font-size:11px;cursor:pointer}.ds-case-list{list-style:none;margin:8px 0 0;padding:0}.ds-case-list li{display:flex;flex-wrap:wrap;gap:4px 8px;justify-content:space-between;padding:5px 0;border-top:1px solid var(--bm-line,#e5e5e5)}.ds-history{color:var(--bm-link,#171717);font-weight:550;text-decoration:none;text-underline-offset:4px}.ds-history:hover{text-decoration:underline}.ds-preview-controls{display:flex;align-items:center;gap:16px;margin-top:12px;font-size:12px}.ds-refresh{display:inline-block;background:var(--bm-surface,#fff);color:var(--bm-text,#171717);border:1px solid var(--bm-line,#e5e5e5);border-radius:4px;font:inherit;padding:6px 10px;cursor:pointer}.ds-retry{background:none;border:0;color:var(--bm-text,#171717);text-decoration:underline;text-underline-offset:3px;font:inherit;padding:4px 0;cursor:pointer}.ds-refresh:focus-visible,.ds-retry:focus-visible,.ds-history:focus-visible,.ds-result-cases summary:focus-visible{outline:3px solid #737373;outline-offset:4px;border-radius:3px}.ds-refresh:disabled,.ds-retry:disabled{opacity:.5;cursor:not-allowed}"
     },
     {
       "name": "Account continuation",
@@ -346,22 +312,22 @@
       "refersTo": "entry-container",
       "description": "Original account identity and continuation action in the narrower entry shell.",
       "html": "<div class=\"ds-account\"><strong>Student account</strong><span class=\"ds-account-id\">student</span><a class=\"ds-account-action\" href=\"#course\">Continue<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a></div>",
-      "css": ".ds-account{font-family:var(--bm-font, \"BetterMarmo Geist\", system-ui, sans-serif);color:var(--bm-text,#171717);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px;border:1px solid var(--bm-line,#e5e5e5);border-radius:8px;background:var(--bm-surface,#fff);animation:ds-entry 200ms cubic-bezier(.23,1,.32,1)}.ds-account strong{font-size:18px;font-weight:600}.ds-account-id{color:var(--bm-muted,#666666)}.ds-account-action{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:10px 16px;border-radius:4px;background:var(--bm-action,#cc0000);color:var(--bm-on-action,#ffffff);text-decoration:none}.ds-account-action svg{transition:transform 150ms cubic-bezier(.23,1,.32,1)}.ds-account-action:focus-visible{outline:3px solid var(--bm-link,#aa0000);outline-offset:4px}.ds-account-action:active{opacity:.85}@media(hover:hover) and (pointer:fine){.ds-account-action:hover svg{transform:translateX(3px)}}@media(max-width:640px){.ds-account{display:grid;gap:4px;padding:20px}.ds-account-action{margin-top:16px}}@media(prefers-reduced-motion:reduce){.ds-account{animation:ds-entry-fade 150ms ease}.ds-account-action svg{transition:none;transform:none!important}}@keyframes ds-entry{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}@keyframes ds-entry-fade{from{opacity:.7}to{opacity:1}}"
+      "css": ".ds-account{font-family:var(--bm-font, \"BetterMarmo Geist\", system-ui, sans-serif);color:var(--bm-text,#171717);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px;border:1px solid var(--bm-line,#e5e5e5);border-radius:8px;background:var(--bm-surface,#fff);animation:ds-entry 200ms cubic-bezier(.23,1,.32,1)}.ds-account strong{font-size:18px;font-weight:600}.ds-account-id{color:var(--bm-muted,#666)}.ds-account-action{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:10px 16px;border-radius:4px;background:var(--bm-action,#171717);color:var(--bm-surface,#fff);text-decoration:none}.ds-account-action svg{transition:transform 150ms cubic-bezier(.23,1,.32,1)}.ds-account-action:focus-visible{outline:3px solid #737373;outline-offset:4px}.ds-account-action:active{opacity:.85}@media(hover:hover) and (pointer:fine){.ds-account-action:hover svg{transform:translateX(3px)}}@media(max-width:640px){.ds-account{display:grid;gap:4px;padding:20px}.ds-account-action{margin-top:16px}}@media(prefers-reduced-motion:reduce){.ds-account{animation:ds-entry-fade 150ms ease}.ds-account-action svg{transition:none;transform:none!important}}@keyframes ds-entry{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}@keyframes ds-entry-fade{from{opacity:.7}to{opacity:1}}"
     },
     {
       "name": "Course chooser and archive",
       "kind": "custom",
       "refersTo": "entry-container",
-      "description": "Transparent current-term indicator with fine gold outline, red card border and quiet other-term cards.",
+      "description": "Current-term emphasis and quiet other-term cards retain original order and links; unknown terms remain neutral.",
       "html": "<div class=\"ds-courses\"><a class=\"ds-course ds-current-course\" href=\"#cs136\"><span><strong>CS136</strong><small>Fall 2026</small><span class=\"ds-course-current\">Current term</span></span><span class=\"ds-course-open\">Open course<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></span></a><a class=\"ds-course ds-other-course\" href=\"#cs246\"><span><strong>CS246</strong><small>Winter 2026</small></span><span class=\"ds-course-open\">Open course<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></span></a></div><h2 class=\"ds-archive-title\">Previous terms</h2><a class=\"ds-archive\" href=\"#previous\">Winter 2026<svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14m-6-6 6 6-6 6\"/></svg></a>",
-      "css": ".ds-courses{font-family:var(--bm-font, \"BetterMarmo Geist\", system-ui, sans-serif);color:var(--bm-text,#171717);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:24px 0 48px;animation:ds-entry 200ms cubic-bezier(.23,1,.32,1)}.ds-course{display:flex;flex-direction:column;gap:28px;padding:24px;border:1px solid var(--bm-line,#e5e5e5);border-radius:8px;background:var(--bm-surface,#fff);color:inherit;text-decoration:none}.ds-course strong{display:block;font-size:24px;font-weight:650;letter-spacing:-.025em}.ds-course small{display:block;margin-top:4px;color:var(--bm-muted,#666666);font-size:13px}.ds-course-open{display:flex;align-items:center;justify-content:space-between;font-size:13px}.ds-course svg{transition:transform 150ms cubic-bezier(.23,1,.32,1)}.ds-archive-title{font-family:var(--bm-font, \"BetterMarmo Geist\", system-ui, sans-serif);color:var(--bm-text,#171717);font-size:16px;margin-top:40px}.ds-archive{font-family:var(--bm-font, \"BetterMarmo Geist\", system-ui, sans-serif);color:var(--bm-text,#171717);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--bm-line,#e5e5e5);color:var(--bm-muted,#666666);font-size:13px;text-decoration:none}.ds-course:focus-visible,.ds-archive:focus-visible{outline:3px solid var(--bm-link,#aa0000);outline-offset:4px}.ds-course:active,.ds-archive:active{opacity:.85}.ds-archive:hover{text-decoration:underline}@media(hover:hover) and (pointer:fine){.ds-course:hover{border-color:var(--bm-muted,#666666);background:var(--bm-soft,#f5f5f5)}.ds-course:hover svg{transform:translateX(3px)}}@media(max-width:640px){.ds-courses{grid-template-columns:1fr;gap:12px}}@media(prefers-reduced-motion:reduce){.ds-courses{animation:ds-entry-fade 150ms ease}.ds-course svg{transition:none;transform:none!important}}@keyframes ds-entry{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}@keyframes ds-entry-fade{from{opacity:.7}to{opacity:1}} .ds-current-course{border-color:var(--bm-action,#cc0000)}.ds-course-current{display:inline-block;margin-top:8px;padding:3px 8px;background:transparent;color:var(--bm-text,#171717);border:1px solid #eab308;border-radius:3px;font-size:12px;font-weight:550}.ds-other-course{background:var(--bm-ground,#ffffff);color:var(--bm-muted,#666666)}.ds-other-course strong{font-weight:500}@media(hover:hover) and (pointer:fine){.ds-current-course:hover,.ds-other-course:hover{border-color:var(--bm-muted,#666666);background:var(--bm-soft,#f5f5f5)}}"
+      "css": ".ds-courses{font-family:var(--bm-font, \"BetterMarmo Geist\", system-ui, sans-serif);color:var(--bm-text,#171717);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:24px 0 48px;animation:ds-entry 200ms cubic-bezier(.23,1,.32,1)}.ds-course{display:flex;flex-direction:column;gap:28px;padding:24px;border:1px solid var(--bm-line,#e5e5e5);border-radius:8px;background:var(--bm-surface,#fff);color:inherit;text-decoration:none}.ds-course strong{display:block;font-size:24px;font-weight:650;letter-spacing:-.025em}.ds-course small{display:block;margin-top:4px;color:var(--bm-muted,#666);font-size:13px}.ds-course-open{display:flex;align-items:center;justify-content:space-between;font-size:13px}.ds-course svg{transition:transform 150ms cubic-bezier(.23,1,.32,1)}.ds-archive-title{font-family:var(--bm-font, \"BetterMarmo Geist\", system-ui, sans-serif);color:var(--bm-text,#171717);font-size:16px;margin-top:40px}.ds-archive{font-family:var(--bm-font, \"BetterMarmo Geist\", system-ui, sans-serif);color:var(--bm-text,#171717);display:flex;align-items:center;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid var(--bm-line,#e5e5e5);color:var(--bm-muted,#666);font-size:13px;text-decoration:none}.ds-course:focus-visible,.ds-archive:focus-visible{outline:3px solid #737373;outline-offset:4px}.ds-course:active,.ds-archive:active{opacity:.85}.ds-archive:hover{text-decoration:underline}@media(hover:hover) and (pointer:fine){.ds-course:hover{border-color:var(--bm-muted,#666);background:var(--bm-soft,#f5f5f5)}.ds-course:hover svg{transform:translateX(3px)}}@media(max-width:640px){.ds-courses{grid-template-columns:1fr;gap:12px}}@media(prefers-reduced-motion:reduce){.ds-courses{animation:ds-entry-fade 150ms ease}.ds-course svg{transition:none;transform:none!important}}@keyframes ds-entry{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}@keyframes ds-entry-fade{from{opacity:.7}to{opacity:1}} .ds-current-course{border-color:var(--bm-text,#171717)}.ds-course-current{display:inline-block;margin-top:8px;padding:3px 8px;background:var(--bm-action,#171717);color:var(--bm-surface,#fff);border-radius:3px;font-size:12px;font-weight:550}.ds-other-course{background:var(--bm-ground,#fafafa);color:var(--bm-muted,#666)}.ds-other-course strong{font-weight:500}@media(hover:hover) and (pointer:fine){.ds-current-course:hover,.ds-other-course:hover{border-color:var(--bm-muted,#666);background:var(--bm-soft,#f5f5f5)}}"
     }
   ],
   "narrative": {
-    "northStar": "Neutral workspace, restrained accents",
-    "overview": "The latest user correction requires plain white or black backgrounds with gold and red accents only. Page, card and header surfaces are pure white in light appearance and pure black in dark appearance. Neutral gray rules and supporting fills, red actions and links, and a fine gold current-term outline retain the modern Composio-inspired layout and bundled Geist. The first viewport gives the course table room to breathe and keeps every desktop project column visible.",
+    "northStar": "Monochrome workspace",
+    "overview": "The user-approved direction is black and white, very clean and modern, using Composio's visual language. Geist, quiet navigation, thin neutral rules and square black actions keep dense academic content easy to scan. The first viewport gives the course table room to breathe and keeps every desktop project column visible.",
     "keyCharacteristics": [
-      "Pure white/black surfaces, neutral gray support fills and restrained red/gold accents.",
+      "Monochrome surfaces and actions, with no green, gold or colored result cells.",
       "Locally bundled Geist and tabular numbers.",
       "Wide desktop tables and labelled phone project fields.",
       "Flat surfaces and reversible enhancements to original workflows."
@@ -379,13 +345,13 @@
       }
     ],
     "dos": [
-      "Do use the user-approved plain white/black surfaces and restrained red/gold accents, bundled Geist and shared light/dark roles.",
+      "Do use the user-approved monochrome direction, bundled Geist and shared light/dark roles.",
       "Do keep all five desktop project columns visible and phone fields labelled.",
       "Do retain original links, forms, navigation and textual outcomes.",
       "Do provide visible keyboard focus, overflow cues and honest empty states."
     ],
     "donts": [
-      "Don't claim the upstream palette is a verified match for the deployed Waterloo stylesheet.",
+      "Don't reintroduce green, gold or colored status cells.",
       "Don't infer grades or submission success, or add misleading date sorting.",
       "Don't add decorative nested cards, pill actions, shadows or unnecessary motion.",
       "Don't claim signed-in live verification from fixture tests."
