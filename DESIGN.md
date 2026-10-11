@@ -134,6 +134,11 @@ components:
     textColor: "{colors.surface}"
     rounded: "{rounded.control}"
     padding: "10px 16px"
+  current-term-indicator:
+    backgroundColor: "{colors.action}"
+    textColor: "{colors.surface}"
+    rounded: "{rounded.submit-link}"
+    padding: "3px 8px"
   entry-container:
     backgroundColor: "{colors.surface}"
     rounded: "{rounded.entry-container}"
@@ -157,7 +162,7 @@ components:
 
 The user-approved direction is black and white, very clean and modern, using Composio's visual language. Geist, quiet navigation, thin neutral rules and square black actions keep dense academic content easy to scan. The first viewport gives the course table room to breathe and keeps every desktop project column visible.
 
-Source authority is `extension/content/styles.css`, `extension/content/content.js`, `extension/content/results.js` and `extension/popup/popup.css`. This describes the implemented extension, including its neutral dark appearance. Sixteen Firefox fixture tests passed with zero extension lint errors, notices or warnings; final light login and course screenshots were reviewed at desktop and phone widths; signed-in Waterloo compatibility has not been directly verified.
+Source authority is `extension/content/styles.css`, `extension/content/content.js`, `extension/content/results.js` and `extension/popup/popup.css`. This describes the implemented extension, including its neutral dark appearance. Seventeen Firefox fixture tests passed with zero extension lint errors, notices or warnings; final light login and course screenshots were reviewed at desktop and phone widths, including current-term course captures fixed to October 11, 2026 (Fall 2026); signed-in Waterloo compatibility has not been directly verified.
 
 **Key Characteristics:**
 
@@ -213,6 +218,8 @@ A neutral surface header holds the identity and an end-aligned outlined theme bu
 Login presents “Continue to Marmoset”, original authorization help, account name, directory identity and a Continue action. Account rows use a surface fill, thin neutral border and 24px cell inset; names use 18px/600 and directory text is muted. The action retains server-owned attributes and uses the original destination.
 
 Current courses use full-card original links with 24px inset, 24px/650 course codes, muted 13px terms and a 13px Open course row. Pointer hover adds a soft fill and muted border. Previous terms are quiet 13px text links with 14px vertical inset, fine bottom rules and a 16px section title. Exact original archive URLs remain intact. Original labels are retained and restored when the extension is disabled. No raster asset ships with this extension.
+
+Recognized Winter/Spring/Fall YYYY terms compare against the exact year and Toronto calendar: January–April is Winter, May–August Spring, September–December Fall. Current-term cards use a text-colored border and an inverted “Current term” indicator (12px/550, 3px corners, 3px 8px inset). Other recognized terms use ground fill, muted text and 500-weight course codes without reducing whole-card opacity. Unknown terms keep the neutral default. Original order and links remain intact.
 
 ### Table tools and data
 

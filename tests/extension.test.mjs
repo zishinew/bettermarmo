@@ -228,3 +228,25 @@ test('entry pages preserve original navigation, adapt on phones and restore when
     await page.close();
   }
 });
+test('course emphasis follows Toronto term boundaries and year without changing links or order', async () => {
+  for (const [instant, expected] of [
+    ['2026-01-01T05:00:00Z','Winter 2026'], ['2026-05-01T03:59:59Z','Winter 2026'],
+    ['2026-05-01T04:00:00Z','Spring 2026'], ['2026-09-01T03:59:59Z','Spring 2026'],
+    ['2026-09-01T04:00:00Z','Fall 2026'], ['2026-10-11T16:00:00Z','Fall 2026'],
+    ['2027-01-01T04:59:59Z','Fall 2026'], ['2027-01-01T05:00:00Z',null]
+  ]) {
+    const page = await browser.newPage({timezoneId:'Asia/Tokyo'});
+    await page.clock.install({time: new Date(instant)});
+    await page.goto(`${base}/demo/courses.html`);
+    await page.locator('.bm-course-list').waitFor();
+    const terms = await page.locator('.bm-current-course .bm-course-term').allTextContents();
+    assert.deepEqual(terms, expected === 'Winter 2026' ? [expected,expected] : expected ? [expected] : []);
+    assert.equal(await page.locator('.bm-course-current').count(),terms.length);
+    assert.equal(await page.locator('.bm-other-course').count(),4-terms.length);
+    assert.deepEqual(await page.locator('.bm-course-code').allTextContents(),['CS136L','CS136','CS136','CS136']);
+    assert.deepEqual(await page.locator('.bm-course-list a').evaluateAll(nodes=>nodes.map(n=>n.getAttribute('href'))),Array(4).fill('index.html'));
+    await page.evaluate(()=>browser.storage.local.set({settings:{enabled:false,theme:'system',compact:false}}));
+    assert.equal(await page.locator('.bm-course-current:visible').count(),0);
+    await page.close();
+  }
+});

@@ -352,6 +352,13 @@
     attachProjectResults(state);
     filter(state);
   }
+  function currentTerm() {
+    // Waterloo's academic terms follow Toronto's calendar, including at midnight abroad.
+    const parts = new Intl.DateTimeFormat('en-CA', {timeZone: 'America/Toronto', year: 'numeric', month: 'numeric'}).formatToParts(new Date());
+    const month = Number(parts.find(part => part.type === 'month').value);
+    const year = parts.find(part => part.type === 'year').value;
+    return `${month <= 4 ? 'Winter' : month <= 8 ? 'Spring' : 'Fall'} ${year}`;
+  }
   function formatEntryPages() {
     for (const table of document.querySelectorAll('table')) {
       if (table.classList.contains('bm-account-table')) continue;
@@ -399,6 +406,12 @@
         original.append(...link.childNodes);
         const content = el('span', 'bm-ui bm-course-content');
         content.append(el('span', 'bm-course-code', match[1]), el('span', 'bm-course-term', match[2]));
+        const term = match[2].trim().replace(/\s+/g, ' ');
+        if (/^(Winter|Spring|Fall) \d{4}$/i.test(term)) {
+          const current = term.toLowerCase() === currentTerm().toLowerCase();
+          item.classList.add(current ? 'bm-current-course' : 'bm-other-course');
+          if (current) content.append(el('span', 'bm-course-current', 'Current term'));
+        }
         const action = el('span', 'bm-ui bm-course-open', 'Open course');
         action.append(icon('arrow'));
         link.append(original, content, action);

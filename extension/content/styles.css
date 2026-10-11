@@ -296,3 +296,9 @@ html.bm-enabled[data-bm-theme='dark'] {
   .bm-enabled .bm-account-table td:last-child { margin-top: 16px; }
   .bm-enabled .bm-account-action { width: 100%; }
 }
+
+/* Keep other terms accessible; hierarchy comes from surface and weight, never fading the whole card. */
+.bm-enabled .bm-current-course a { border-color: var(--bm-text); }
+.bm-enabled .bm-course-current { align-self: start; justify-self: start; margin-top: 8px; padding: 3px 8px; background: var(--bm-action); color: var(--bm-surface); border-radius: 3px; font-size: 12px; font-weight: 550; }
+.bm-enabled .bm-other-course a { background: var(--bm-ground); color: var(--bm-muted); }
+.bm-enabled .bm-other-course .bm-course-code { font-weight: 500; }
