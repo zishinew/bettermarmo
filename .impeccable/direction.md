@@ -1,3 +1,8 @@
+# Marmoset palette, modern workspace
+
+Latest user request supersedes the earlier monochrome restriction: retain the modern layout and interactions while restoring Marmoset’s original colors. Upstream styles.css uses #ffcc33 gold, #cc0000/#aa0000 red, and #fff3cc cream. Live Waterloo stylesheet redirects to SSO, so this is an upstream-informed palette rather than a verified deployed match. Gold topbar, red actions and links, subtle cream table headers, warm neutral ground. Current term remains gold label/red border; dark mode uses warm dark surfaces with lighter red/gold accents. Preserve Geist, layouts, links, forms, motion and all result behavior. No shipping raster created. Finish: independent scoped review and updated DESIGN.md/sidecar.
+
+## Previous direction and functional contracts (historical)
 # Monochrome workspace
 
 Mode: Operate. User-confirmed direction replaces the green campus treatment: black and white, very clean and modern, using Composio's visual language. Reference inspected at https://composio.dev/ and /tmp/bettermarmo-composio.png. User failure evidence: /var/folders/8w/pc14z49x61qfk46k5wlqv7n00000gn/T/codex-clipboard-66a4518e-7330-4fa7-b95e-14ff8847bf51.png.
