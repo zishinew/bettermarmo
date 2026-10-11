@@ -41,7 +41,7 @@ npm run lint
 npm run build
 ```
 
-The package is written to `dist/bettermarmo-1.4.0.zip`. No npm dependencies ship inside it. Firefox fixture tests cover search, empty states, sorting, combined result filters, local settings, mobile overflow, dynamic rows, preservation of the original submission form, and the restricted permission scope.
+The package is written to `dist/bettermarmo-1.4.1.zip`. No npm dependencies ship inside it. Firefox fixture tests cover search, empty states, sorting, combined result filters, local settings, mobile overflow, dynamic rows, preservation of the original submission form, and the restricted permission scope.
 
 ## Compatibility and boundaries
 
@@ -69,4 +69,4 @@ The Marmoset account chooser and course-selection list have dedicated responsive
 
 Course cards label the current academic term from the current Toronto date (Winter: January–April; Spring: May–August; Fall: September–December). Other recognized terms use quieter surfaces and text; unknown terms remain neutral.
 
-Palette: Marmoset-inspired gold identity surfaces, red actions/links, and cream table accents, based on upstream styles.css; the deployed Waterloo stylesheet remains unavailable behind SSO. Modern layout, typography, and interactions are retained. Dark mode uses warm surfaces with accessible lighter red/gold accents.
+Palette: pure white and black page, card, and header surfaces. Red is reserved for actions/links; gold is a fine outline on the current-term indicator. Gray dividers, hover surfaces, and status cells keep dense tables readable. No cream, brown, or gold-filled headers.

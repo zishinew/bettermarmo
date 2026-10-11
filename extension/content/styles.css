@@ -7,49 +7,49 @@
 /* Dormant until the script has enabled the redesign. */
 .bm-ui { display: none; }
 html.bm-enabled {
-  --bm-ground: #fffcf5;
+  --bm-ground: #ffffff;
   --bm-surface: #ffffff;
   --bm-text: #171717;
-  --bm-muted: #6b6050;
-  --bm-line: #e7dfcf;
-  --bm-soft: #fff3cc;
+  --bm-muted: #666666;
+  --bm-line: #e5e5e5;
+  --bm-soft: #f5f5f5;
   --bm-action: #cc0000;
   --bm-on-action: #ffffff;
-  --bm-header: #ffcc33;
+  --bm-header: #ffffff;
   --bm-on-header: #171717;
   --bm-hover-action: #aa0000;
   --bm-link: #aa0000;
   --bm-selection: #ffcc33;
   --bm-pass-bg: #fafafa;
   --bm-pass: #404040;
-  --bm-fail-bg: #fff0ed;
+  --bm-fail-bg: #fafafa;
   --bm-fail: #aa0000;
-  --bm-pending-bg: #fff3cc;
-  --bm-pending: #6b5010;
+  --bm-pending-bg: #f5f5f5;
+  --bm-pending: #666666;
   color-scheme: light;
   background: var(--bm-ground);
   scrollbar-color: #a3a3a3 var(--bm-ground);
   scroll-padding-top: 90px;
 }
 html.bm-enabled[data-bm-theme='dark'] {
-  --bm-ground: #17140f;
-  --bm-surface: #211c15;
-  --bm-text: #fff9ed;
-  --bm-muted: #bdb09b;
-  --bm-line: #473d2c;
-  --bm-soft: #352b15;
-  --bm-action: #ffb4a8;
-  --bm-on-action: #301410;
-  --bm-header: #352b15;
-  --bm-on-header: #ffdc80;
-  --bm-hover-action: #ffc8bf;
-  --bm-link: #ffb4a8;
+  --bm-ground: #000000;
+  --bm-surface: #000000;
+  --bm-text: #f5f5f5;
+  --bm-muted: #a3a3a3;
+  --bm-line: #303030;
+  --bm-soft: #171717;
+  --bm-action: #ff6b6b;
+  --bm-on-action: #000000;
+  --bm-header: #000000;
+  --bm-on-header: #f5f5f5;
+  --bm-hover-action: #ff8585;
+  --bm-link: #ff6b6b;
   --bm-pass-bg: #171717;
   --bm-pass: #d4d4d4;
-  --bm-fail-bg: #3a211e;
-  --bm-fail: #ffb4a8;
-  --bm-pending-bg: #352b15;
-  --bm-pending: #ffdc80;
+  --bm-fail-bg: #171717;
+  --bm-fail: #ff6b6b;
+  --bm-pending-bg: #171717;
+  --bm-pending: #a3a3a3;
   color-scheme: dark;
 }
 .bm-enabled body {
@@ -313,5 +313,5 @@ html.bm-enabled[data-bm-theme='dark'] {
 
 .bm-enabled .bm-mark { background: #171717; color: #ffffff; }
 .bm-enabled .bm-current-course a { border-color: var(--bm-action); }
-.bm-enabled .bm-course-current { background: #ffcc33; color: #171717; }
+.bm-enabled .bm-course-current { background: transparent; color: var(--bm-text); border: 1px solid #eab308; }
 .bm-enabled th { color: var(--bm-text); }

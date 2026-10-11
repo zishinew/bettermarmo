@@ -1,3 +1,8 @@
+# Latest correction: neutral surfaces, restrained accents
+
+User rejection overrides the previous palette attempt. Pure #ffffff light and #000000 dark page/card/header surfaces; no cream, brown, gold-filled header or colored table heading. Neutral gray rules, soft hover/status backgrounds. Red only for small links/actions, gold only fine current-term outline. Current-term text stays neutral; Geist, geometry, motion and original behavior unchanged. 17 tests/lint/build to verify.
+
+## Superseded directions and retained functionality
 # Marmoset palette, modern workspace
 
 Latest user request supersedes the earlier monochrome restriction: retain the modern layout and interactions while restoring Marmoset’s original colors. Upstream styles.css uses #ffcc33 gold, #cc0000/#aa0000 red, and #fff3cc cream. Live Waterloo stylesheet redirects to SSO, so this is an upstream-informed palette rather than a verified deployed match. Gold topbar, red actions and links, subtle cream table headers, warm neutral ground. Current term remains gold label/red border; dark mode uses warm dark surfaces with lighter red/gold accents. Preserve Geist, layouts, links, forms, motion and all result behavior. No shipping raster created. Finish: independent scoped review and updated DESIGN.md/sidecar.

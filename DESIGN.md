@@ -1,47 +1,48 @@
 ---
 name: BetterMarmo
-description: Modern Marmoset workflows with an upstream gold, red and cream palette.
+description: Modern Marmoset workflows with pure black/white surfaces and restrained red/gold accents.
 colors:
-  ground: "#fffcf5"
+  ground: "#ffffff"
   surface: "#ffffff"
   text: "#171717"
-  muted: "#6b6050"
-  line: "#e7dfcf"
-  soft: "#fff3cc"
+  muted: "#666666"
+  line: "#e5e5e5"
+  soft: "#f5f5f5"
   action: "#cc0000"
   on-action: "#ffffff"
-  header: "#ffcc33"
+  header: "#ffffff"
   on-header: "#171717"
   action-hover: "#aa0000"
   link: "#aa0000"
   selection: "#ffcc33"
-  on-selection: "#171717"
   pass-bg: "#fafafa"
   pass: "#404040"
-  fail-bg: "#fff0ed"
+  fail-bg: "#fafafa"
   fail: "#aa0000"
-  pending-bg: "#fff3cc"
-  pending: "#6b5010"
-  dark-ground: "#17140f"
-  dark-surface: "#211c15"
-  dark-text: "#fff9ed"
-  dark-muted: "#bdb09b"
-  dark-line: "#473d2c"
-  dark-soft: "#352b15"
-  dark-action: "#ffb4a8"
-  dark-on-action: "#301410"
-  dark-header: "#352b15"
-  dark-on-header: "#ffdc80"
-  dark-action-hover: "#ffc8bf"
-  dark-link: "#ffb4a8"
+  pending-bg: "#f5f5f5"
+  pending: "#666666"
+  dark-ground: "#000000"
+  dark-surface: "#000000"
+  dark-text: "#f5f5f5"
+  dark-muted: "#a3a3a3"
+  dark-line: "#303030"
+  dark-soft: "#171717"
+  dark-action: "#ff6b6b"
+  dark-on-action: "#000000"
+  dark-header: "#000000"
+  dark-on-header: "#f5f5f5"
+  dark-action-hover: "#ff8585"
+  dark-link: "#ff6b6b"
   dark-pass-bg: "#171717"
   dark-pass: "#d4d4d4"
-  dark-fail-bg: "#3a211e"
-  dark-fail: "#ffb4a8"
-  dark-pending-bg: "#352b15"
-  dark-pending: "#ffdc80"
+  dark-fail-bg: "#171717"
+  dark-fail: "#ff6b6b"
+  dark-pending-bg: "#171717"
+  dark-pending: "#a3a3a3"
   focus: "#aa0000"
-  dark-focus: "#ffb4a8"
+  dark-focus: "#ff6b6b"
+  gold-outline: "#eab308"
+  on-selection: "#171717"
 typography:
   headline:
     fontFamily: "BetterMarmo Geist, system-ui, sans-serif"
@@ -143,8 +144,8 @@ components:
     rounded: "{rounded.control}"
     padding: "10px 16px"
   current-term-indicator:
-    backgroundColor: "{colors.selection}"
-    textColor: "{colors.on-selection}"
+    backgroundColor: "transparent"
+    textColor: "{colors.text}"
     rounded: "{rounded.submit-link}"
     padding: "3px 8px"
   entry-container:
@@ -166,28 +167,28 @@ components:
 
 ## Overview
 
-**Creative North Star: "Marmoset palette, modern workspace"**
+**Creative North Star: "Neutral workspace, restrained accents"**
 
-The latest user-approved direction restores Marmoset’s gold, red and cream palette while retaining the modern Composio-inspired layout and bundled Geist. Gold headers, red actions and links, cream supporting surfaces and warm neutrals keep dense academic content easy to scan. The first viewport gives the course table room to breathe and keeps every desktop project column visible.
+The latest user correction requires plain white or black backgrounds with gold and red accents only. Page, card and header surfaces are pure white in light appearance and pure black in dark appearance. Neutral gray rules and supporting fills, red actions and links, and a fine gold current-term outline retain the modern Composio-inspired layout and bundled Geist. The first viewport gives the course table room to breathe and keeps every desktop project column visible.
 
-Source authority is `extension/content/styles.css`, `extension/content/content.js`, `extension/content/results.js` and `extension/popup/popup.css`. This describes the implemented extension, including its warm dark appearance. Seventeen Firefox fixture tests passed with zero extension lint errors, notices or warnings; light and dark desktop, phone and popup captures were reviewed for build 1.4.0; signed-in Waterloo compatibility has not been directly verified.
+Source authority is `extension/content/styles.css`, `extension/content/content.js`, `extension/content/results.js` and `extension/popup/popup.css`. This describes the implemented extension, including its pure black dark appearance. Seventeen Firefox fixture tests passed with zero extension lint errors, notices or warnings; build 1.4.1 completed and screenshot review approved shipping; signed-in Waterloo compatibility has not been directly verified.
 
 **Key Characteristics:**
 
-- Gold headers, red actions and links, cream support surfaces and warm neutrals.
+- Pure white/black surfaces, neutral gray support fills and restrained red/gold accents.
 - Locally bundled Geist and tabular numbers.
 - Wide desktop tables and labelled phone project fields.
 - Flat surfaces and reversible enhancements to original workflows.
 
 ## Colors
 
-The frontmatter owns light values and dark overrides. Header and on-header roles establish the gold identity; action and on-action provide red controls with contrasting text; link and focus share the deeper red. Cream soft surfaces distinguish table headers and hover fills from warm ground and white surface.
+The frontmatter owns light values and dark overrides. Ground, surface and header are pure white in light appearance and pure black in dark appearance. Gray rules, table headings, status backgrounds and hover fills supply hierarchy. Red actions and links carry the functional accent; on-action supplies contrasting text. Current-term indicators have transparent fill, neutral text and a fine gold outline. Gold selection is a small browser interaction accent.
 
-The palette comes from [upstream Marmoset styles.css](https://github.com/squished18/marmoset_ECE_base/blob/master/SubmitServer/trunk/SubmitServer2/WebRoot/styles.css). The live Waterloo stylesheet redirects to SSO; deployed colors remain unverified. The latest user request supersedes the earlier monochrome restriction.
+The user’s latest correction supersedes the earlier gold/red/cream palette attempt. [Upstream Marmoset styles.css](https://github.com/squished18/marmoset_ECE_base/blob/master/SubmitServer/trunk/SubmitServer2/WebRoot/styles.css) informed the red/gold accents; the live Waterloo stylesheet redirects to SSO and deployed colors remain unverified.
 
-Pass remains neutral; failure uses pale red fill and red text; pending uses cream fill and warm brown text. Preserve original outcome text: pass uses weight 600, enhanced failure cells 650, and pending cells weight 550 with italics. Pass and failure fills survive row hover; pending follows the soft hover fill. These treatments do not infer grades.
+Pass remains neutral; failure uses red text on a neutral fill; pending uses gray text and fill. Preserve original outcome text: pass uses weight 600, enhanced failure cells 650, and pending cells weight 550 with italics. Pass and failure fills survive row hover; pending follows the soft hover fill. These treatments do not infer grades.
 
-Dark appearance uses warm ground, surfaces and borders, lighter red actions and links, and gold header text. On-action is a separate dark ink role rather than the surface color. The popup shares this palette with a gold header and red Open Marmoset action. Selection remains gold with near-black text in both themes. Keyboard focus follows content link red and popup action red.
+Dark appearance keeps all principal surfaces pure black, with gray rules/support fills and lighter red actions/links. On-action is black. The popup shares these neutral surfaces and red controls. Selection remains gold with near-black text in both themes. Keyboard focus follows content link red and popup action red.
 
 ## Typography
 
@@ -211,7 +212,7 @@ Forms cap at 720px. The popup is 340px wide with 22px gutters, `24px 22px` heade
 
 ## Elevation & Depth
 
-There are no shadows or blur. Account and course choosers receive one 200ms entrance from .4 to 1 opacity and a 6px rise, using cubic-bezier(.23, 1, .32, 1). Course and account arrows move 3px on pointer hover with a 150ms transition using the same easing. Reduced motion replaces the entrance with a 150ms ease opacity fade from .7 to 1 and disables arrow movement. Existing reading tables have no entrance motion. Warm surface tones and 1px rules provide depth. The fixed header's stacking order is structural. Hover changes cream fills and underlines links; keyboard focus is an outline without glow.
+There are no shadows or blur. Account and course choosers receive one 200ms entrance from .4 to 1 opacity and a 6px rise, using cubic-bezier(.23, 1, .32, 1). Course and account arrows move 3px on pointer hover with a 150ms transition using the same easing. Reduced motion replaces the entrance with a 150ms ease opacity fade from .7 to 1 and disables arrow movement. Existing reading tables have no entrance motion. Neutral surface tones and 1px rules provide depth. The fixed header's stacking order is structural. Hover changes gray fills and underlines links; keyboard focus is an outline without glow.
 
 ## Shapes
 
@@ -221,15 +222,15 @@ Actions are square in character with restrained 3–4px corners. Entry account a
 
 ### Header and navigation
 
-A gold header (warm dark surface with gold text in dark appearance) holds the identity and an end-aligned outlined theme button. Its 18px SVG icons use rounded strokes. Theme hover uses the soft cream fill. Retain original navigation, instructor links, breadcrumbs and logout. Breadcrumb links underline on hover; logout link and visited states use the link role. The original header image is grayscale.
+A white header (pure black in dark appearance) holds the identity and an end-aligned outlined theme button. Its 18px SVG icons use rounded strokes. Theme hover uses the soft gray fill. Retain original navigation, instructor links, breadcrumbs and logout. Breadcrumb links underline on hover; logout link and visited states use the link role. The original header image is grayscale.
 
 ### Account and course entry
 
-Login presents “Continue to Marmoset”, original authorization help, account name, directory identity and a Continue action. Account rows use a surface fill, thin warm border and 24px cell inset; names use 18px/600 and directory text is muted. The action retains server-owned attributes and uses the original destination.
+Login presents “Continue to Marmoset”, original authorization help, account name, directory identity and a Continue action. Account rows use a surface fill, thin neutral border and 24px cell inset; names use 18px/600 and directory text is muted. The action retains server-owned attributes and uses the original destination.
 
-Current courses use full-card original links with 24px inset, 24px/650 course codes, muted 13px terms and a 13px Open course row. Pointer hover adds a soft fill and muted warm border. Previous terms are quiet 13px text links with 14px vertical inset, fine bottom rules and a 16px section title. Exact original archive URLs remain intact. Original labels are retained and restored when the extension is disabled. No raster asset ships with this extension.
+Current courses use full-card original links with 24px inset, 24px/650 course codes, muted 13px terms and a 13px Open course row. Pointer hover adds a soft fill and muted border. Previous terms are quiet 13px text links with 14px vertical inset, fine bottom rules and a 16px section title. Exact original archive URLs remain intact. Original labels are retained and restored when the extension is disabled. No raster asset ships with this extension.
 
-Recognized Winter/Spring/Fall YYYY terms compare against the exact year and Toronto calendar: January–April is Winter, May–August Spring, September–December Fall. Current-term cards use an action-red border and a gold “Current term” indicator with near-black text (12px/550, 3px corners, 3px 8px inset). Other recognized terms use ground fill, muted text and 500-weight course codes without reducing whole-card opacity. Unknown terms keep the default card treatment. Original order and links remain intact.
+Recognized Winter/Spring/Fall YYYY terms compare against the exact year and Toronto calendar: January–April is Winter, May–August Spring, September–December Fall. Current-term cards use an action-red border and a transparent “Current term” indicator with neutral text and a 1px gold outline (12px/550, 3px corners, 3px 8px inset). Other recognized terms use ground fill, muted text and 500-weight course codes without reducing whole-card opacity. Unknown terms keep the default card treatment. Original order and links remain intact.
 
 ### Table tools and data
 
@@ -239,7 +240,7 @@ Supported sortable headers are unfilled text controls with direction indicators;
 
 ### Actions and fields
 
-Primary submit controls use action fill, on-action text and `11px 20px` padding. Inline submit links use `5px 12px`, 12px text and 3px corners. Light hover deepens the red; dark hover uses a lighter red. View actions remain text links. Standard fields use surface fill, 1px warm borders, 4px corners and `10px 12px` padding. Disabled inputs/buttons use half opacity and a not-allowed cursor. File upload remains native with a soft file-selector button.
+Primary submit controls use action fill, on-action text and `11px 20px` padding. Inline submit links use `5px 12px`, 12px text and 3px corners. Light hover deepens the red; dark hover uses a lighter red. View actions remain text links. Standard fields use surface fill, 1px neutral borders, 4px corners and `10px 12px` padding. Disabled inputs/buttons use half opacity and a not-allowed cursor. File upload remains native with a soft file-selector button.
 
 ### Outcome cells and messages
 
@@ -247,7 +248,7 @@ Use original text and recognized outcome/status/result columns or semantic class
 
 ### Latest submission results
 
-The original submissions cell starts with a compact, unboxed results block and retains its original links below. A weight-550 status identifies the latest submission; tabular counts show each available test group as `passed / available passed`. Fractions sourced only from weighted score columns remain labelled `score`. Two named cases preview their textual outcomes. A native details disclosure labelled with the available case count reveals the complete readable list; opening it hides the duplicate preview. Long case names wrap and case rows use fine warm dividers, without colored badges.
+The original submissions cell starts with a compact, unboxed results block and retains its original links below. A weight-550 status identifies the latest submission; tabular counts show each available test group as `passed / available passed`. Fractions sourced only from weighted score columns remain labelled `score`. Two named cases preview their textual outcomes. A native details disclosure labelled with the available case count reveals the complete readable list; opening it hides the duplicate preview. Long case names wrap and case rows use fine neutral dividers, without colored badges.
 
 Loading says `Loading results…`. Empty history says `Not submitted`; pending and compile failures say `Submitted · Testing pending` and `Submitted · Did not compile`. A submitted history without counts says `Test results not available yet`. Unreadable details retain the summary and say `Test cases unavailable · Open submission details`. A failed history read says `Couldn’t load results` and offers an underlined Retry action. These states stay distinct and never imply success or a grade.
 
@@ -259,7 +260,7 @@ Content focus uses a `3px solid` link-colored outline, 4px offset and 3px radius
 
 ## Do's and Don'ts
 
-- **Do** use the user-approved upstream gold/red/cream palette, bundled Geist and shared light/dark roles.
+- **Do** use the user-approved plain white/black surfaces and restrained red/gold accents, bundled Geist and shared light/dark roles.
 - **Do** keep all five desktop project columns visible and phone fields labelled.
 - **Do** retain original links, forms, navigation and textual outcomes.
 - **Do** provide visible keyboard focus, overflow cues and honest empty states.
