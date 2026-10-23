@@ -1,6 +1,6 @@
 import { test, before, after } from 'node:test';
 import assert from 'node:assert/strict';
-import { firefox } from '@playwright/test';
+import { firefox, chromium } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import http from 'node:http';
 import { resolve, extname } from 'node:path';
@@ -15,7 +15,7 @@ before(async () => {
   });
   await new Promise(done => server.listen(0,'127.0.0.1',done));
   base = `http://127.0.0.1:${server.address().port}`;
-  browser = await firefox.launch();
+  browser = await (process.env.BETTERMARMO_BROWSER === 'chromium' ? chromium : firefox).launch();
 });
 after(async () => { await browser?.close(); await new Promise(done => server.close(done)); });
 async function pageAt(path, options = {}) {
@@ -249,4 +249,20 @@ test('course emphasis follows Toronto term boundaries and year without changing 
     assert.equal(await page.locator('.bm-course-current:visible').count(),0);
     await page.close();
   }
+});
+test('chrome-only API namespace loads stored settings and receives live changes', async () => {
+ const page=await browser.newPage();
+ await page.route('**/demo.js',async route=>{
+  const shim=(await readFile('demo/demo.js','utf8')).replace('window.browser =','window.chrome =');
+  await route.fulfill({contentType:'text/javascript',body:shim});
+ });
+ await page.goto(`${base}/demo/courses.html`);
+ await page.locator('.bm-course-list').waitFor();
+ await page.evaluate(()=>chrome.storage.local.set({settings:{enabled:true,theme:'dark',compact:true}}));
+ await page.waitForFunction(()=>document.documentElement.dataset.bmTheme==='dark' && document.documentElement.classList.contains('bm-compact'));
+ await page.reload();
+ await page.waitForFunction(()=>document.documentElement.dataset.bmTheme==='dark');
+ await page.evaluate(()=>chrome.storage.local.set({settings:{enabled:false,theme:'dark',compact:true}}));
+ await page.waitForFunction(()=>!document.documentElement.classList.contains('bm-enabled'));
+ await page.close();
 });

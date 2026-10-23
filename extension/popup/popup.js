@@ -1,4 +1,5 @@
 'use strict';
+const api = globalThis.browser?.storage ? globalThis.browser : globalThis.chrome;
 const defaults = { enabled: true, theme: 'system', compact: false };
 const controls = ['enabled', 'theme', 'compact'].map(id => document.getElementById(id));
 const status = document.getElementById('status');
@@ -9,14 +10,14 @@ function appearance() {
 }
 async function init() {
   try {
-    const stored = await browser.storage.local.get('settings');
+    const stored = await api.storage.local.get('settings');
     const settings = { ...defaults, ...stored.settings };
     controls.forEach(control => { if (control.type === 'checkbox') control.checked = settings[control.id]; else control.value = settings[control.id]; });
     appearance();
     controls.forEach(control => control.addEventListener('change', async () => {
       const next = Object.fromEntries(controls.map(input => [input.id, input.type === 'checkbox' ? input.checked : input.value]));
       appearance();
-      try { await browser.storage.local.set({ settings: next }); status.textContent = 'Saved. Applies to open Marmoset pages.'; }
+      try { await api.storage.local.set({ settings: next }); status.textContent = 'Saved. Applies to open Marmoset pages.'; }
       catch { status.textContent = 'Couldn’t save settings. Reopen the extension and try again.'; }
     }));
   } catch {

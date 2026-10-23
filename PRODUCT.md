@@ -12,7 +12,7 @@ Assumption for this session: Firefox WebExtension, plain JavaScript and CSS. No 
 Inferred from the brief: University of Waterloo students using Marmoset to submit programming assignments and inspect feedback.
 
 ## Product Purpose
-Redesign https://marmoset.student.cs.uwaterloo.ca/ with a modern, clean interface through a Firefox extension.
+Redesign https://marmoset.student.cs.uwaterloo.ca/ with a modern, clean interface through Firefox and Chrome extensions.
 
 ## Capabilities and Constraints
 Preserve original content, URLs, forms, hidden inputs, authentication, and submission semantics. Restrict extension access to the specified HTTPS host. No analytics or external requests. User-requested update: show latest submission results on the project list via read-only same-origin history/result requests. Empty histories say Not submitted; pending/error states remain distinct. Local settings only. The signed-in Waterloo DOM is unavailable; compatibility is based on upstream JSP templates and must be verified on a signed-in deployment.
@@ -25,3 +25,5 @@ Empty starting repository. Upstream course, project, submission and upload templ
 
 ## Product Principles
 Preserve working academic workflows. Make dense content easy to scan. Keep enhancements reversible. Never infer grades or submission success.
+
+Chrome support shares the original enhancement code, supports browser/chrome storage namespaces, and packages a separate MV3 manifest with PNG icons. Browser-specific metadata is confined to the build.

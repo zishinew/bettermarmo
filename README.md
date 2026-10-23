@@ -1,6 +1,6 @@
 # BetterMarmo
 
-A Firefox extension that gives Waterloo Marmoset a calmer, cleaner interface. It enhances the original pages instead of rebuilding the submission system.
+A Firefox and Chrome extension that gives Waterloo Marmoset a calmer, cleaner interface. It enhances the original pages instead of rebuilding the submission system.
 
 - Composio-inspired black and white interface, with light, dark, and system appearance.
 - Searchable course, project, submission, and test-result tables.
@@ -10,6 +10,19 @@ A Firefox extension that gives Waterloo Marmoset a calmer, cleaner interface. It
 - Readable outcome labels, keyboard focus, responsive table scrolling, and compact density.
 - Native file inputs, original links, form actions, hidden fields, and submission behavior.
 - One-click disable in the extension popup. Settings are stored locally; no analytics or external services. Results use read-only requests to Marmoset while enabled.
+
+## Load in Chrome
+
+Requires Chrome 120 or later. Building locally requires Node.js 22 or later. Download `dist/bettermarmo-chrome-1.5.0.zip` and extract it, or run `npm install` then `npm run build:chrome` to create `dist/chrome` locally.
+
+1. Open `chrome://extensions` and enable **Developer mode**.
+2. Click **Load unpacked** and select the extracted folder containing `manifest.json` (or `dist/chrome` when building locally).
+3. Open Marmoset, sign in normally, and reload any existing Marmoset tabs.
+4. Pin BetterMarmo from Chrome’s extensions menu to access the settings popup.
+
+This is a local unpacked installation, not a Chrome Web Store listing. Keep its folder in place. Updates require rebuilding/replacing the folder, clicking Reload on the extension card, then refreshing Marmoset.
+
+Chrome shares the Firefox implementation and permissions. Its generated manifest omits Firefox-only metadata, sets the Chrome minimum, and references PNG exports of the existing icon. `scripts/build-chrome.mjs` copies all code unchanged into `dist/chrome`, then packages a ZIP. The committed PNG icons can optionally be regenerated with `node scripts/render-icons.mjs` after installing Playwright Chromium; icon regeneration is not required for a normal build.
 
 ## Load in Firefox
 
@@ -35,13 +48,14 @@ Open http://127.0.0.1:4173. The legacy preview at `/demo/legacy.html` reproduces
 The preview includes course lists, projects, submission history, test results, and an upload form. **All preview data is illustrative. The demo does not upload files.** The browser API shim in `demo/demo.js` is excluded from the extension package.
 
 ```sh
-npx playwright install firefox
+npx playwright install firefox chromium
 npm test
 npm run lint
 npm run build
+npm run test:chrome
 ```
 
-The package is written to `dist/bettermarmo-1.4.2.zip`. No npm dependencies ship inside it. Firefox fixture tests cover search, empty states, sorting, combined result filters, local settings, mobile overflow, dynamic rows, preservation of the original submission form, and the restricted permission scope.
+The Firefox package is written to `dist/bettermarmo-1.5.0.zip`, and the Chrome package to `dist/bettermarmo-chrome-1.5.0.zip`. Use `npm run build:firefox` or `npm run build:chrome` for one target. No npm dependencies ship inside it. Firefox fixture tests cover search, empty states, sorting, combined result filters, local settings, mobile overflow, dynamic rows, preservation of the original submission form, and the restricted permission scope.
 
 ## Compatibility and boundaries
 
@@ -70,3 +84,5 @@ The Marmoset account chooser and course-selection list have dedicated responsive
 Course cards label the current academic term from the current Toronto date (Winter: January–April; Spring: May–August; Fall: September–December). Other recognized terms use quieter surfaces and text; unknown terms remain neutral.
 
 Palette: restored the black-and-white design from version 1.3.1, including the neutral current-term badge and stronger border. Course selection, animations, and inline submission results are unchanged.
+
+Chrome validation includes the same fixture suite in Chromium plus an actual unpacked-extension test with native storage, popup persistence, and live content updates. Signed-in Waterloo pages remain unverified.

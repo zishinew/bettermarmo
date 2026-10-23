@@ -2,7 +2,7 @@
 (() => {
   'use strict';
   if (document.getElementById('bm-topbar')) return;
-  const api = typeof browser !== 'undefined' ? browser : null;
+  const api = globalThis.browser?.storage ? globalThis.browser : globalThis.chrome?.storage ? globalThis.chrome : null;
   const defaults = { enabled: true, theme: 'system', compact: false };
   let settings = { ...defaults };
   const tables = new Map();
