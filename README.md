@@ -13,7 +13,7 @@ A Firefox and Chrome extension that gives Waterloo Marmoset a calmer, cleaner in
 
 ## Load in Chrome
 
-Requires Chrome 120 or later. Building locally requires Node.js 22 or later. Download `dist/bettermarmo-chrome-1.5.0.zip` and extract it, or run `npm install` then `npm run build:chrome` to create `dist/chrome` locally.
+Requires Chrome 120 or later. Building locally requires Node.js 22 or later. Download `dist/bettermarmo-chrome-1.5.1.zip` and extract it, or run `npm install` then `npm run build:chrome` to create `dist/chrome` locally.
 
 1. Open `chrome://extensions` and enable **Developer mode**.
 2. Click **Load unpacked** and select the extracted folder containing `manifest.json` (or `dist/chrome` when building locally).
@@ -55,7 +55,7 @@ npm run build
 npm run test:chrome
 ```
 
-The Firefox package is written to `dist/bettermarmo-1.5.0.zip`, and the Chrome package to `dist/bettermarmo-chrome-1.5.0.zip`. Use `npm run build:firefox` or `npm run build:chrome` for one target. No npm dependencies ship inside it. Firefox fixture tests cover search, empty states, sorting, combined result filters, local settings, mobile overflow, dynamic rows, preservation of the original submission form, and the restricted permission scope.
+The Firefox package is written to `dist/bettermarmo-1.5.1.zip`, and the Chrome package to `dist/bettermarmo-chrome-1.5.1.zip`. Use `npm run build:firefox` or `npm run build:chrome` for one target. No npm dependencies ship inside it. Firefox fixture tests cover search, empty states, sorting, combined result filters, local settings, mobile overflow, dynamic rows, preservation of the original submission form, and the restricted permission scope.
 
 ## Compatibility and boundaries
 

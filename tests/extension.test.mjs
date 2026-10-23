@@ -266,3 +266,25 @@ test('chrome-only API namespace loads stored settings and receives live changes'
  await page.waitForFunction(()=>!document.documentElement.classList.contains('bm-enabled'));
  await page.close();
 });
+test('legacy red link rules cannot leak into monochrome courses or invert action text', async () => {
+ const page=await browser.newPage();
+ await page.clock.install({time:new Date('2026-10-23T16:00:00Z')});
+ await page.goto(`${base}/demo/courses.html`);
+ await page.locator('.bm-course-list').waitFor();
+ await page.addStyleTag({content:'a:link {color:#cc0000} a:visited {color:#aa0000} div.breadcrumb a:link {color:white}'});
+ for(const [theme,current,other] of [['light','rgb(23, 23, 23)','rgb(102, 102, 102)'],['dark','rgb(245, 245, 245)','rgb(163, 163, 163)']]) {
+  await page.evaluate(theme=>browser.storage.local.set({settings:{enabled:true,theme,compact:false}}),theme);
+  assert.equal(await page.locator('.bm-course-list a').last().evaluate(n=>getComputedStyle(n).color),current);
+  assert.equal(await page.locator('.bm-course-code').last().evaluate(n=>getComputedStyle(n).color),current);
+  assert.equal(await page.locator('.bm-course-list a').first().evaluate(n=>getComputedStyle(n).color),other);
+ }
+ await page.evaluate(()=>browser.storage.local.set({settings:{enabled:false,theme:'light',compact:false}}));
+ assert.equal(await page.locator('.bm-course-list a').last().evaluate(n=>getComputedStyle(n).color),'rgb(204, 0, 0)');
+ await page.close();
+ const projects=await pageAt('index.html');
+ await projects.addStyleTag({content:'a:link{color:#cc0000}a:visited{color:#aa0000}div.breadcrumb a:link{color:white}'});
+ await projects.evaluate(()=>browser.storage.local.set({settings:{enabled:true,theme:'light',compact:false}}));
+ assert.equal(await projects.locator('.breadcrumb a').evaluate(n=>getComputedStyle(n).color),'rgb(23, 23, 23)');
+ assert.equal(await projects.locator('.bm-submit-link').first().evaluate(n=>getComputedStyle(n).color),'rgb(255, 255, 255)');
+ await projects.close();
+});

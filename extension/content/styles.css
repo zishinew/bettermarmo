@@ -57,7 +57,7 @@ html.bm-enabled[data-bm-theme='dark'] {
 }
 .bm-enabled *, .bm-enabled *::before, .bm-enabled *::after { box-sizing: border-box; }
 .bm-enabled ::selection { background: #d4d4d4; color: #171717; }
-.bm-enabled a { color: var(--bm-link); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+html.bm-enabled a { color: var(--bm-link); text-underline-offset: 4px; text-decoration-thickness: 1px; }
 .bm-enabled a:hover { text-decoration: underline; }
 .bm-enabled :focus-visible { outline: 3px solid #737373; outline-offset: 4px; border-radius: 3px; }
 .bm-enabled h1, .bm-enabled h2, .bm-enabled h3 {
@@ -98,7 +98,7 @@ html.bm-enabled[data-bm-theme='dark'] {
 .bm-enabled .header img { max-height: 32px; width: auto; }
 .bm-enabled .breadcrumb { background: none; color: var(--bm-muted); padding: 0; margin: 0 0 28px; }
 .bm-enabled .breadcrumb p { font: inherit; font-size: 13px; font-variant: normal; font-weight: 400; }
-.bm-enabled .breadcrumb a, .bm-enabled .breadcrumb a:visited { color: var(--bm-link); text-decoration: none; }
+.bm-enabled .breadcrumb a:link, .bm-enabled .breadcrumb a:visited { color: var(--bm-link); text-decoration: none; }
 .bm-enabled .breadcrumb a:hover { text-decoration: underline; }
 .bm-enabled .logout { position: relative; float: right; width: auto; padding: 0; margin: 0; background: none; color: var(--bm-link); font: inherit; }
 .bm-enabled .logout a { color: var(--bm-link); }
@@ -261,7 +261,7 @@ html.bm-enabled[data-bm-theme='dark'] {
 .bm-enabled .bm-account-action .bm-ui { display: inline; }
 .bm-enabled .bm-course-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 24px 0 48px; padding: 0; list-style: none; }
 .bm-enabled .bm-course-list li { margin: 0; padding: 0; }
-.bm-enabled .bm-course-list a { display: flex; flex-direction: column; gap: 28px; height: 100%; padding: 24px; background: var(--bm-surface); border: 1px solid var(--bm-line); border-radius: 8px; text-decoration: none; }
+.bm-enabled .bm-course-list a { color: var(--bm-link); display: flex; flex-direction: column; gap: 28px; height: 100%; padding: 24px; background: var(--bm-surface); border: 1px solid var(--bm-line); border-radius: 8px; text-decoration: none; }
 .bm-enabled .bm-course-content { display: grid; gap: 4px; }
 .bm-course-code { font-size: 24px; font-weight: 650; letter-spacing: -.025em; }
 .bm-course-term { color: var(--bm-muted); font-size: 13px; }
